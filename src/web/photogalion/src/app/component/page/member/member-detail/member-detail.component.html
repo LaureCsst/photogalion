@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row pt-5">
+        <div *ngIf='member' class="col-md-4 title secondary-color">
+            <div>{{ member.name }}</div>
+            <div>{{ member.firstName }}</div>
+            <div>{{ member.birthday }}</div>
+            <div>
+                Couleur: 
+                <div>{{ member.color }}</div>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12">
+            <img src="assets\member\thumbnails\{{member.thumbnail}}.jpg" alt="Avatar" class="member-thumbnail">
+        
+        <div class="title primary-color">{{ member.pseudo }}</div>
+        <div class="title primary-color py-auto">
+            Supprimer ce matelot
+        </div>
+        <div class="ml-5 mt-5">
+            <div class=" py-auto px-auto">
+                <button (click)="onDeleteMember(member.id)" class="add-btn" routerLink="/member">-</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

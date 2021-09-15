@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row pt-5">
+        <div class="col-md-10">
+            <div class="title primary-color">
+                Marins
+            </div>
+            <ul *ngIf="members" class="row" >
+                <li *ngFor="let m of members"  (click)="onGetMember(m.id)" [routerLink]="['/member-detail', m.id]" class="text-center col-md-4 clickable mt-2">
+                    <div class="col-md-2 col-xs-12">
+                        <img src="assets\member\thumbnails\{{m.thumbnail}}.jpg" alt="Avatar" class="member-thumbnail">
+                    </div>
+                    <div class="secondary-color title text-center clickable"> 
+                        {{m.pseudo}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-2 col-xs-12">
+                <div class="title primary-color py-auto text-center">
+                    Ajouter de nouveaux matelots
+                </div>
+                <div class="ml-5 mt-5">
+                    <div class=" py-auto px-auto">
+                        <button class="add-btn" [routerLink]="['/member-form']">+</button>
+                    </div>
+                </div>
+        </div>
+
+    </div>
+</div>
