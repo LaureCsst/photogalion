@@ -7,10 +7,11 @@ import fr.coussout.Photogalion.dto.MemberFormDto;
 import fr.coussout.Photogalion.dto.MemberRecapDto;
 import fr.coussout.Photogalion.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 
@@ -38,9 +39,10 @@ public class MemberRestController {
 		memberService.delete(id);
 	}
 
+
 	@PostMapping("/add")
-	public void addMember(@Valid @RequestBody MemberFormDto memberFormDto) {
-		memberService.add(memberFormDto);
+	public ResponseEntity<String> addMember(@Valid @RequestBody MemberFormDto memberFormDto) throws Exception {
+		return memberService.add(memberFormDto);
 	}
 }
 

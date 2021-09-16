@@ -52,6 +52,8 @@ public class PhotoGalionServiceImpl implements IPhotogalionService{
 						member.setColor(randomColors[new Random().nextInt(randomColors.length)]);
 						member.setPseudo("Marin " + name);
 						member.setThumbnail("thumb"+index);
+						member.setMail(name+"@free.fr");
+						member.setPassword("PasEncoreDePassword");
 						memberRepository.save(member);
 					});
 	}

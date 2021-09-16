@@ -7,7 +7,6 @@ public class MemberFormDto {
     public String firstName;
     public String name;
     public String pseudo;
-    @NotNull(message = "balalalalal")
     public String mail;
     public String password;
     public Date birthday;
