@@ -9,6 +9,7 @@ import { MemberFormDto } from '../models/member';
 export class MemberService {
   public host:string="http://localhost:8080"
   constructor(private http:HttpClient) { }
+  message:string;
 
   public getMembers() {
     return this.http.get(this.host+"/marin/all-recap");
@@ -21,9 +22,16 @@ export class MemberService {
     return this.http.get(this.host+"/marin/delete/" + id);
   }
   public onAddMember(member:MemberFormDto){
-    return this.http.post(this.host+"/marin/add",member).subscribe(member=>{
+    this.http.post(this.host+"/marin/add",member).subscribe(data=>{
+    });
+    this.onValidationForm();
+  }
+  public onValidationForm(){
+    this.http.get(this.host+"/marin/add").subscribe(message=>{
+
     });
   }
+
 }
 
 

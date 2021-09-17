@@ -79,6 +79,9 @@ src: url(assets/font/ABeeZee-Italic.ttf) format("opentype");
     font-size: x-large;
     width: 3rem;
 }
+.disable-btn {
+    background-color:#2c387036;
+}
 
 .member-thumbnail{
     border-radius: 50%;

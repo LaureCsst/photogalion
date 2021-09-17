@@ -3,6 +3,9 @@ import { MemberService } from 'src/app/services/member.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { TryCatchStmt } from '@angular/compiler';
 import { MemberFormDto } from 'src/app/models/member';
+import { Router } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 
 
@@ -14,6 +17,7 @@ import { MemberFormDto } from 'src/app/models/member';
 export class MemberFormComponent implements OnInit {
   //items = this.memberService.getItems();
   memberFormDto:MemberFormDto= new MemberFormDto();
+  messageReturn:String;
 
   checkoutForm = this.formBuilder.group({
     name: '',
@@ -26,17 +30,20 @@ export class MemberFormComponent implements OnInit {
   }); 
 
   constructor(public memberService: MemberService, 
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.getMemberForm();
   }
 
-  onSubmit(): void {
+  onSubmit(): String | undefined {
     if (this.checkoutForm.invalid) {
-      
-      //tambouille pour afficher des trucs avant le return
-      return;
+      if(this.checkoutForm.status==null){
+          
+      this.messageReturn= "Certains champs sont obligatoires !!!";
+      }
+      //this.messageReturn= "Certains champs sont obligatoires";
+      return this.messageReturn;
     }
     // Process checkout data here
     //this.items = this.memberService.clearCart();
@@ -45,8 +52,12 @@ export class MemberFormComponent implements OnInit {
       this.memberFormDto= { ...this.checkoutForm.value}
       this.memberService.onAddMember(this.memberFormDto);
     console.warn('Votre marin a été créé', this.memberFormDto);
-    this.checkoutForm.reset();  
+    this.checkoutForm.reset(); 
+    this.router.navigate(['/member']);
+    this.messageReturn="Votre mari a bien été enregistré"
+    return this.messageReturn;
     } catch (error) {
+      return
       
     }
     

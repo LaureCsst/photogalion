@@ -12,6 +12,7 @@ export class MemberComponent implements OnInit {
 
   public members: any;
   public member: any;
+  public message:any;
 
   constructor(public memberService:MemberService) { }
 
@@ -42,7 +43,6 @@ export class MemberComponent implements OnInit {
   }
 
   public onAddMember(){
-    this.memberService.onAddMember(this.member);
-
+    this.message=this.memberService.onAddMember(this.member)
   }
 }

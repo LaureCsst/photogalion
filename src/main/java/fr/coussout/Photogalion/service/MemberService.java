@@ -9,6 +9,7 @@ import fr.coussout.Photogalion.exception.GlobalExceptionHandler;
 import fr.coussout.Photogalion.mapper.IMemberDetailMapper;
 import fr.coussout.Photogalion.mapper.IMemberFormMapper;
 import fr.coussout.Photogalion.mapper.IMemberRecapMapper;
+import org.aspectj.bridge.IMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MemberService {
@@ -32,9 +31,6 @@ public class MemberService {
     private IMemberDetailMapper memberDetailMapper;
     @Autowired
     private IMemberFormMapper memberFormMapper;
-
-    private GlobalExceptionHandler exceptionHandler;
-
 
     public List<MemberRecapDto> findAllMembers(){
         List<Member> members= memberRepository.findAll();
@@ -58,43 +54,46 @@ public class MemberService {
     }
 
 
-    public ResponseEntity<String> add(MemberFormDto memberFormDto) {
+    public String add(MemberFormDto memberFormDto) {
 
         Member member = new Member();
         member=memberFormMapper.dtoToEntity(memberFormDto);
-        System.out.println("1");
-        ResponseEntity<String> response= checkValidationConstrainte(member);
-        System.out.println("2");
+
+        HashMap<Boolean, String> validation = isValid(member);
+        //Iterate on the map, if validation is ok persist member
+        //Otherwise return the warning message
+        for(Map.Entry<Boolean, String> entry : validation.entrySet()) {
+            if(!entry.getKey()) {
+                return entry.getValue();
+            }
+
+        }
         if(member.getThumbnail()==null){
             member.setThumbnail("thumb0");
         }
         memberRepository.save(member);
-        return new ResponseEntity<String>(
-                "ok",
-                HttpStatus.OK);
+        return "Le membre a été ajouté";
     }
 
-    public ResponseEntity<String> checkValidationConstrainte(Object object){
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator=factory.getValidator();
+    //check enter field of the form
+    public HashMap<Boolean, String> isValid(Member member){
+        HashMap<Boolean, String> validation = new HashMap<>();
 
-        Set<ConstraintViolation<Object>> constraintViolations =
-                validator.validate(object);
-        if (constraintViolations.size() > 0 ) {
-            for (ConstraintViolation<Object> constraint : constraintViolations) {
-                System.out.println("Je veux pas" + constraint.getMessage());
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(constraint.getMessage());
-            }
-        } else {
-            System.out.println("Je veux bien ");
-            return new ResponseEntity<String>(
-                    "ok",
-                    HttpStatus.OK);
+        if(member.getPseudo()== null){
+            validation.put(false,"Veuillez entrer un pseudo");
+            return validation;
         }
-        return new ResponseEntity<String>(
-
-                "ok",
-                HttpStatus.OK);
+        if (member.getMail()== null){
+            validation.put(false,"Veuillez entrer un email");
+            return validation;
+        }
+        if (member.getPassword()== null){
+            validation.put(false,"Veuillez entrer un mot de passe");
+            return validation;
+        }
+        validation.put(true,"Le membre a été ajouté");
+        return validation;
     }
+
+
 }

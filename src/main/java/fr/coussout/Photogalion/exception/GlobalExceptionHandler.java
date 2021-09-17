@@ -12,10 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import javax.validation.*;
 
 public class GlobalExceptionHandler {
 	public ResponseDto responseDto;
@@ -59,5 +56,30 @@ public class GlobalExceptionHandler {
 		return errors;
 	}
 
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<String> checkValidationConstrainte(Object object){
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		Validator validator=factory.getValidator();
+
+		Set<ConstraintViolation<Object>> constraintViolations =
+				validator.validate(object);
+		if (constraintViolations.size() > 0 ) {
+			for (ConstraintViolation<Object> constraint : constraintViolations) {
+				System.out.println("Je veux pas " + constraint.getMessage());
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(constraint.getMessage());
+			}
+		} else {
+			System.out.println("Je veux bien ");
+			return new ResponseEntity<String>(
+					"ok",
+					HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(
+
+				"ok",
+				HttpStatus.OK);
+	}
 
 }

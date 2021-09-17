@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MemberService } from 'src/app/services/member.service';
+
 
 @Component({
   selector: 'app-member-detail',
@@ -9,8 +10,9 @@ import { MemberService } from 'src/app/services/member.service';
 })
 export class MemberDetailComponent implements OnInit {
   member: any;
-
-  constructor(public memberService: MemberService, private activatedRoute: ActivatedRoute) { }
+  
+  constructor(public memberService: MemberService, private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getMember(this.activatedRoute.snapshot.params.id);
@@ -23,16 +25,21 @@ export class MemberDetailComponent implements OnInit {
     },err=>{
       console.log(err);
     })
-
   }
 
   public onDeleteMember(id:any){
     this.memberService.onDeleteMember(id).
     subscribe(data=>{
       this.member=data;
+      this.router.navigate(['/member']);
     },err=>{
       console.log(err);
     })
-
+    
   }
+
+  reloadPage(): void {
+    window.location.reload();
+  }
+
 }
