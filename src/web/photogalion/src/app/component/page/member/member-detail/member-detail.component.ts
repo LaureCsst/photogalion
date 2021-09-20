@@ -38,8 +38,6 @@ export class MemberDetailComponent implements OnInit {
     
   }
 
-  reloadPage(): void {
-    window.location.reload();
-  }
+
 
 }

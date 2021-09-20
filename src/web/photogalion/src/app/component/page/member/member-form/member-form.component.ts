@@ -18,6 +18,7 @@ export class MemberFormComponent implements OnInit {
   //items = this.memberService.getItems();
   memberFormDto:MemberFormDto= new MemberFormDto();
   messageReturn:String;
+  isSaved:Boolean;
 
   checkoutForm = this.formBuilder.group({
     name: '',
@@ -33,17 +34,15 @@ export class MemberFormComponent implements OnInit {
     private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-    this.getMemberForm();
   }
 
   onSubmit(): String | undefined {
     if (this.checkoutForm.invalid) {
       if(this.checkoutForm.status==null){
-          
+      this.isSaved=false;
       this.messageReturn= "Certains champs sont obligatoires !!!";
-      }
-      //this.messageReturn= "Certains champs sont obligatoires";
       return this.messageReturn;
+      }
     }
     // Process checkout data here
     //this.items = this.memberService.clearCart();
@@ -53,17 +52,16 @@ export class MemberFormComponent implements OnInit {
       this.memberService.onAddMember(this.memberFormDto);
     console.warn('Votre marin a été créé', this.memberFormDto);
     this.checkoutForm.reset(); 
-    this.router.navigate(['/member']);
-    this.messageReturn="Votre mari a bien été enregistré"
+    this.messageReturn="Votre marin a bien été enregistré"
+    this.isSaved=true;
     return this.messageReturn;
     } catch (error) {
       return
-      
     }
     
   }
 
-  public getMemberForm(){
-
+  public getMembersPage(){
+    this.router.navigate(['/member']);
   }
 }

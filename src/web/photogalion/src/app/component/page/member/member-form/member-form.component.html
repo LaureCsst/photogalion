@@ -1,5 +1,13 @@
 <div class="container pt-5">
   <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+  <div class="d-flex border-dashed py-2 pl-4 justify-content-center" *ngIf="this.isSaved" >
+    <div class="secondary-color title-big col-md-4" >
+      {{messageReturn}}
+    </div>
+    <div class="col-md-4">
+        <button class="add-btn-word" (click)="getMembersPage()">Retour</button>
+    </div>
+  </div>
     <div class="primary-color title-big">
       Créez votre Marin :
     </div>

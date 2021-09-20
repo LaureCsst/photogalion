@@ -77,7 +77,6 @@ src: url(assets/font/ABeeZee-Italic.ttf) format("opentype");
     padding: 0.3rem 0.7rem;
     border: none;
     font-size: x-large;
-    width: 3rem;
 }
 .disable-btn {
     background-color:#2c387036;
@@ -96,6 +95,9 @@ src: url(assets/font/ABeeZee-Italic.ttf) format("opentype");
     font-family: 'ABeeZee-Italic';
 }
 
+.border-dashed {
+    border: #2c387036 dashed;
+}
 @media only screen and (max-width: 767px) {
     .add-btn {
      display: inline-block;
