@@ -1,29 +1,39 @@
 <div class="container">
-    <div class="row pt-5">
-        <div *ngIf='member' class="col-md-4 title secondary-color">
-            <div>{{ member.name }}</div>
-            <div>{{ member.firstName }}</div>
-            <div>{{ member.birthday }}</div>
-            <div>
-                Couleur: 
-                <div>{{ member.color }}</div>
-            </div>
-            <div class="py-auto px-auto">
-                <button routerLink="/member-update-form/{{member.id}}" [state]=member class="add-btn">-</button>
-            </div>
-        </div>
-        <div class="col-md-2 col-xs-12">
+    <h1 class="display-4 text primary-color text-center  py-5">Votre marin</h1>
+    <div class="row pt-5 d-flex justify-content-center mb-5 px-auto">
+        <div class="col-md-2 col-xs-12 mx-auto d-block">
             <img src="assets\member\thumbnails\{{member.thumbnail}}.jpg" alt="Avatar" class="member-thumbnail">
-        
-        <div class="title primary-color">{{ member.pseudo }}</div>
-        <div class="title primary-color py-auto">
-            Supprimer ce matelot
         </div>
-        <div class="ml-5 mt-5">
-            <div class=" py-auto px-auto">
-                <button (click)="onDeleteMember(member.id)" class="add-btn">-</button>
+        <div *ngIf='member' class="col-md-4 title-big secondary-color">
+            <div *ngIf='member.pseudo' class="row pb-4">
+                <div class="col-md-4">Pseudo</div>
+                <div class="col-md-6">{{ member.pseudo }}</div>
+            </div>
+            <div *ngIf='member.name' class="row pb-4">
+                <div class="col-md-4">Prénom</div>
+                <div class="col-md-6">{{ member.name }}</div>
+            </div>
+            <div *ngIf='member.firstname' class="row pb-4">
+                <div class="col-md-4">Nom</div>
+                <div class="col-md-6">{{ member.firstname }}</div>
+            </div>
+            <div *ngIf='member.birthday' class="row pb-4">
+                <div class="col-md-4">Anniversaire</div>
+                <div class="col-md-6">{{ member.birthday }}</div>
+            </div>
+            <div *ngIf='member.color' class="row pb-4">
+                <div class="col-md-4">Couleur</div>
+                <div class="col-md-6">{{ member.color }}</div>
             </div>
         </div>
+        
     </div>
+    <div class="ml-5 mt-5 row d-flex justify-content-center">
+        <div class=" col-md-2 ">
+            <button (click)="onDeleteMember(member.id)" class="add-btn-word">Supprimer</button>
+        </div>    
+        <div class="col-md-2">
+            <button routerLink="/member-update-form/{{member.id}}" [state]=member class="add-btn-word">Modifier</button>
+        </div>
     </div>
 </div>
