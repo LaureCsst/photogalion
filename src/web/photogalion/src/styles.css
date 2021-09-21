@@ -93,7 +93,13 @@ src: url(assets/font/ABeeZee-Italic.ttf) format("opentype");
     border-radius: 15%;
     border-color: #2c3870;
     font-family: 'ABeeZee-Italic';
+    color: #2c3870;
 }
+
+::placeholder {
+    color:#2c3870 ;
+    opacity: 1; /* Firefox */
+  }
 
 .border-dashed {
     border: #2c387036 dashed;

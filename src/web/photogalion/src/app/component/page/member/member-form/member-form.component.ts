@@ -1,11 +1,8 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { MemberService } from 'src/app/services/member.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { TryCatchStmt } from '@angular/compiler';
 import { MemberFormDto } from 'src/app/models/member';
-import { Router } from '@angular/router';
-import { HttpResponse } from '@angular/common/http';
-import { isNull } from '@angular/compiler/src/output/output_ast';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -16,6 +13,7 @@ import { isNull } from '@angular/compiler/src/output/output_ast';
 })
 export class MemberFormComponent implements OnInit {
   //items = this.memberService.getItems();
+  
   memberFormDto:MemberFormDto= new MemberFormDto();
   messageReturn:String;
   isSaved:Boolean;
@@ -31,7 +29,7 @@ export class MemberFormComponent implements OnInit {
   }); 
 
   constructor(public memberService: MemberService, 
-    private formBuilder: FormBuilder, private router: Router) { }
+    private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -48,8 +46,8 @@ export class MemberFormComponent implements OnInit {
     //this.items = this.memberService.clearCart();
     try {
       // ... map les valeurs 
-      this.memberFormDto= { ...this.checkoutForm.value}
-      this.memberService.onAddMember(this.memberFormDto);
+    this.memberFormDto= { ...this.checkoutForm.value}
+    this.memberService.onAddMember(this.memberFormDto);
     console.warn('Votre marin a été créé', this.memberFormDto);
     this.checkoutForm.reset(); 
     this.messageReturn="Votre marin a bien été enregistré"
@@ -58,7 +56,6 @@ export class MemberFormComponent implements OnInit {
     } catch (error) {
       return
     }
-    
   }
 
   public getMembersPage(){

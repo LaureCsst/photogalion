@@ -26,13 +26,8 @@ public class Member implements Serializable {
 	public Long id;
 	public String firstName;
 	public String name;
-	@NotNull(message = "Vous devez renseigner votre pseudo")
 	public String pseudo;
-	@Email(message = "Votre courriel n'est pas valide")
-	@Column(unique = true)
-	@NotNull(message = "Vous devez renseigner votre e-mail")
 	public String mail;
-	@NotNull(message = "Vous devez renseigner votre mot de passe")
 	public String password;
 	public Date birthday;
 	public String thumbnail;

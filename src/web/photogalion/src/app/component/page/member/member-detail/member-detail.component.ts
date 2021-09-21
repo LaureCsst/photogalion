@@ -38,6 +38,19 @@ export class MemberDetailComponent implements OnInit {
     
   }
 
+  // public onGetUpdateForm(member:object){
+  //   this.router.navigate(['/member-form'+member]);
+  // }
+
+  // public onUpdateMember(id:any){
+  //   this.memberService.onUpdateMember(id).
+  //   subscribe(data=>{
+  //     this.member=data;
+  //   }, err=>{
+  //     console.log(err);
+  //   })
+  // }
+
 
 
 }

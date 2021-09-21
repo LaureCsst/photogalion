@@ -75,6 +75,35 @@ public class MemberService {
         return "Le membre a été ajouté";
     }
 
+    public String update(MemberFormDto memberFormDto, Long id){
+       Member member= memberRepository.findById(id).get();
+       Member memberForm=memberFormMapper.dtoToEntity(memberFormDto);
+       //Add new value from Form
+       member.setFirstName(memberForm.getFirstName());
+       member.setName(memberForm.getName());
+       member.setPseudo(memberForm.getPseudo());
+       member.setMail(memberForm.getMail());
+       member.setPassword(memberForm.getPassword());
+       member.setBirthday(memberForm.getBirthday());
+       member.setColor(memberForm.getColor());
+       //Validate value and return result
+        HashMap<Boolean, String> validation = isValid(member);
+        //Iterate on the map, if validation is ok persist member
+        //Otherwise return the warning message
+        for(Map.Entry<Boolean, String> entry : validation.entrySet()) {
+            if(!entry.getKey()) {
+                return entry.getValue();
+            }
+
+        }
+        if(member.getThumbnail()==null){
+            member.setThumbnail("thumb0");
+        }
+        memberRepository.save(member);
+        return "Le membre a été ajouté";
+
+    }
+
     //check enter field of the form
     public HashMap<Boolean, String> isValid(Member member){
         HashMap<Boolean, String> validation = new HashMap<>();

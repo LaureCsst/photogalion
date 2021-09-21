@@ -45,6 +45,9 @@ export class MemberComponent implements OnInit {
   public onAddMember(){
     this.message=this.memberService.onAddMember(this.member)
   }
+
+
+
   reloadPage(): void {
     window.location.reload();
   }

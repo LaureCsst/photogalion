@@ -31,6 +31,10 @@ export class MemberService {
 
     });
   }
+  public onUpdateMember(member:MemberFormDto, id:number){
+    this.http.put(this.host+"/marin/update/"+id, member).subscribe(data=>{
+    });
+  }
 
 }
 

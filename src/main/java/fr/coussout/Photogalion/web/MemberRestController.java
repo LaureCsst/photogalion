@@ -47,5 +47,10 @@ public class MemberRestController {
 	public String addMember(@Valid @RequestBody MemberFormDto memberFormDto, BindingResult result) throws Exception {
 		return memberService.add(memberFormDto);
 	}
+
+	@PutMapping("/update/{id}")
+	public String updateMember(@Valid @RequestBody MemberFormDto memberFormDto, BindingResult result, @PathVariable("id") Long id) throws Exception {
+		return memberService.update(memberFormDto, id);
+	}
 }
 

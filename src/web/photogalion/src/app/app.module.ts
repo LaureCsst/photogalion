@@ -9,7 +9,8 @@ import { HeaderComponent } from './component/structure/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MemberDetailComponent } from './component/page/member/member-detail/member-detail.component';
 import { MemberFormComponent } from './component/page/member/member-form/member-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MemberUpdateFormComponent } from './component/page/member/member-update-form/member-update-form.component'
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     HeaderComponent,
     MemberDetailComponent,
     MemberFormComponent,
+    MemberUpdateFormComponent,
   ],
   imports: [
     BrowserModule, 
