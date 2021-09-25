@@ -3,7 +3,7 @@ import { MemberService } from 'src/app/services/member.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MemberFormDto } from 'src/app/models/member';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { HttpResponse, HttpEventType } from '@angular/common/http';
 
 
 @Component({
@@ -17,6 +17,14 @@ export class MemberFormComponent implements OnInit {
   memberFormDto:MemberFormDto= new MemberFormDto();
   messageReturn:String;
   isSaved:Boolean;
+  thumbnail:any;
+  event: Event;
+  imageUrl:any;
+
+  public imagePath:any;
+  imgURL: any;
+  public message: string;
+
 
   checkoutForm = this.formBuilder.group({
     name: '',
@@ -25,8 +33,10 @@ export class MemberFormComponent implements OnInit {
     birthday: '',
     mail:new FormControl("",Validators.required),
     password:new FormControl("",Validators.required),
-    color:''
+    color:'',
+    thumbnail:''
   }); 
+
 
   constructor(public memberService: MemberService, 
     private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) { }
@@ -47,6 +57,9 @@ export class MemberFormComponent implements OnInit {
     try {
       // ... map les valeurs 
     this.memberFormDto= { ...this.checkoutForm.value}
+    console.log("Regarde là:")
+    console.log(this.thumbnail);
+    this.memberFormDto.thumbnail=this.thumbnail;
     this.memberService.onAddMember(this.memberFormDto);
     console.warn('Votre marin a été créé', this.memberFormDto);
     this.checkoutForm.reset(); 
@@ -61,4 +74,30 @@ export class MemberFormComponent implements OnInit {
   public getMembersPage(){
     this.router.navigate(['/member']);
   }
+
+  onSelectFile(event:any) {
+    if (event.target.files.length > 0)
+    {
+      const file = event.target.files[0];
+      this.thumbnail = file;
+     // this.f['profile'].setValue(file);
+ 
+    var mimeType = event.target.files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Seules les images sont supportées pour la miniature";
+      return;
+    }
+ 
+    var reader = new FileReader();
+    
+    this.imagePath = file;
+    reader.readAsDataURL(file); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+      console.log(this.imgURL);
+    }
+  }
+     
+      
+    }
 }

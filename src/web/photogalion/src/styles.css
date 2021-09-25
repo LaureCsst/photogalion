@@ -89,6 +89,15 @@ src: url(assets/font/ABeeZee-Italic.ttf) format("opentype");
     object-fit: cover;
     box-shadow: 10px 5px  #2c387036;
 }
+
+.big-member-thumbnail{
+    border-radius: 50%;
+    height: 15rem;
+    width: 15rem;
+    object-fit: cover;
+    box-shadow: 10px 5px  #2c387036;
+}
+
 .input-cust input {
     border-radius: 15%;
     border-color: #2c3870;

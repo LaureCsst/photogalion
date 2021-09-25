@@ -22,7 +22,7 @@ export class MemberService {
     return this.http.get(this.host+"/marin/delete/" + id);
   }
   public onAddMember(member:MemberFormDto){
-    this.http.post(this.host+"/marin/add",member).subscribe(data=>{
+    this.http.post(this.host+"/marin/add", member).subscribe(data=>{
     });
     this.onValidationForm();
   }

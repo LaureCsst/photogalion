@@ -1,5 +1,5 @@
 <div class="container pt-5">
-  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
   <div class="d-flex border-dashed py-2 pl-4 justify-content-center" *ngIf="this.isSaved" >
     <div class="secondary-color title-big col-md-4" >
       {{messageReturn}}
@@ -24,7 +24,7 @@
       <label for="mail" class="col-md-2 title primary-color py-2">
         Mail *
       </label>
-      <input id="mail" type="text" formControlName="mail" class="col-md-4">
+      <input id="mail" type="text" formControlName="mail" class="col-md-4" email>
     </div>
 
 
@@ -54,7 +54,7 @@
       <label for="birthday" class="col-md-2 title primary-color py-2">
         Date d'anniversaire
       </label>
-      <input id="birthday" type="date" formControlName="birthday" class="col-md-4">
+      <input id="birthday" type="date" formControlName="birthday" class="col-md-4" >
     </div>
 
     
@@ -63,6 +63,14 @@
         Couleur
       </label>
       <input id="color" type="text" formControlName="color" class="col-md-4">
+    </div>
+    
+    <div class="row  my-4 input-cust">
+      <label for="thumbnail" class="col-md-2 title primary-color my-2">
+        Couleur
+      </label>
+      <input id="thumbnail" type="file" formControlName="thumbnail" class="col-md-4 " accept="image/png, image/jpeg" (change)="onSelectFile($event)" >
+      <img [src]="imgURL" *ngIf="imgURL" class="member-thumbnail">
     </div>
     <div>
       {{messageReturn}}

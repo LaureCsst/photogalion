@@ -57,7 +57,7 @@ public class MemberService {
     public String add(MemberFormDto memberFormDto) {
 
         Member member = new Member();
-        member=memberFormMapper.dtoToEntity(memberFormDto);
+       member=memberFormMapper.dtoToEntity(memberFormDto);
 
         HashMap<Boolean, String> validation = isValid(member);
         //Iterate on the map, if validation is ok persist member
@@ -70,6 +70,8 @@ public class MemberService {
         }
         if(member.getThumbnail()==null){
             member.setThumbnail("thumb0");
+        } else {
+            System.out.println("Je passe là");
         }
         memberRepository.save(member);
         return "Le membre a été ajouté";

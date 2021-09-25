@@ -6,4 +6,5 @@ export class MemberFormDto {
     password:string;
     birthday:Date;
     color:string;
+    thumbnail:File;
 }
