@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MemberService } from 'src/app/services/member.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -10,9 +11,12 @@ import { MemberService } from 'src/app/services/member.service';
 })
 export class MemberDetailComponent implements OnInit {
   member: any;
+  imageUrl:any;
+  imageBase64String:any;
+  imageBase64:any;
   
   constructor(public memberService: MemberService, private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, private _sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.getMember(this.activatedRoute.snapshot.params.id);
@@ -22,6 +26,7 @@ export class MemberDetailComponent implements OnInit {
     this.memberService.onGetMember(id).
     subscribe(data=>{
       this.member=data;
+      this.imageUrl = (this._sanitizer.bypassSecurityTrustResourceUrl(this.member.thumbnail) as any).changingThisBreaksApplicationSecurity;
     },err=>{
       console.log(err);
     })
@@ -38,18 +43,6 @@ export class MemberDetailComponent implements OnInit {
     
   }
 
-  // public onGetUpdateForm(member:object){
-  //   this.router.navigate(['/member-form'+member]);
-  // }
-
-  // public onUpdateMember(id:any){
-  //   this.memberService.onUpdateMember(id).
-  //   subscribe(data=>{
-  //     this.member=data;
-  //   }, err=>{
-  //     console.log(err);
-  //   })
-  // }
 
 
 

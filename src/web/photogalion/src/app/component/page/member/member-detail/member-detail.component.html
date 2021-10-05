@@ -2,7 +2,7 @@
     <h1 class="display-4 text primary-color text-center  py-5">Votre marin</h1>
     <div class="row pt-5 d-flex justify-content-center mb-5 px-auto">
         <div class="col-md-2 col-xs-12 mx-auto d-block">
-            <img src="assets\member\thumbnails\{{member.thumbnail}}.jpg" alt="Avatar" class="big-member-thumbnail">
+            <img src="{{imageUrl}}" alt="Avatar" class="big-member-thumbnail">
         </div>
         <div *ngIf='member' class="col-md-4 title-big secondary-color">
             <div *ngIf='member.pseudo' class="row pb-4">
@@ -10,12 +10,12 @@
                 <div class="col-md-6">{{ member.pseudo }}</div>
             </div>
             <div *ngIf='member.name' class="row pb-4">
-                <div class="col-md-4">Prénom</div>
+                <div class="col-md-4">nom</div>
                 <div class="col-md-6">{{ member.name }}</div>
             </div>
-            <div *ngIf='member.firstname' class="row pb-4">
-                <div class="col-md-4">Nom</div>
-                <div class="col-md-6">{{ member.firstname }}</div>
+            <div *ngIf='member.firstName' class="row pb-4">
+                <div class="col-md-4">Prénom</div>
+                <div class="col-md-6">{{ member.firstName }}</div>
             </div>
             <div *ngIf='member.birthday' class="row pb-4">
                 <div class="col-md-4">Anniversaire</div>

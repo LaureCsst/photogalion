@@ -1,0 +1,142 @@
+<div class="container pt-5">
+  <div class="col-md-12">
+    <div>
+      <form
+        *ngIf="!isSuccessful"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+        enctype="multipart/form-data"
+      >
+        <div class="form-group row  my-4 input-cust">
+          <label for="username" class="col-md-2 title primary-color py-2">Pseudo *</label>
+          <input
+            type="text"
+            class="col-md-4"
+            name="username"
+            [(ngModel)]="form.username"
+            required
+            minlength="3"
+            maxlength="20"
+            #username="ngModel"
+          />
+          <div class="secondary-color title row" *ngIf="f.submitted && username.invalid">
+            <div *ngIf="username.errors.required" class="d-flex justify-content-end col-md-6">Le pseudo est obligatoire</div>
+            <div *ngIf="username.errors.minlength" class="d-flex justify-content-end col-md-6">
+              Le pseudo doit contenir minimum 3 caractères
+            </div>
+            <div *ngIf="username.errors.maxlength" class="d-flex justify-content-end col-md-6">
+              Le pseudo doit contenir maximum 20 caractères
+            </div>
+          </div>
+        </div>
+        <div class="form-group  row  my-4 input-cust">
+          <label for="email" class="col-md-2 title primary-color py-2">Email *</label>
+          <input
+            type="email"
+            class="col-md-4"
+            name="email"
+            [(ngModel)]="form.email"
+            required
+            email
+            #email="ngModel"
+          />
+          <div class="secondary-color title row" *ngIf="f.submitted && email.invalid">
+            <div *ngIf="email.errors.required" class="d-flex justify-content-end col-md-6">L'email est obligatoire</div>
+            <div *ngIf="email.errors.email" class="d-flex justify-content-end col-md-6">
+              Ceci n'est pas une adresse mail
+            </div>
+          </div>
+        </div>
+        <div class="form-group row my-4 input-cust">
+          <label for="password" class="col-md-2 title primary-color py-2">Mot de passe *</label>
+          <input
+            type="password"
+            name="password"
+            class="col-md-4"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+          />
+          <div class="secondary-color title row" *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required" class="d-flex justify-content-end col-md-6">Le mot de passe est obligatoire</div>
+            <div *ngIf="password.errors.minlength" class="d-flex justify-content-end col-md-6">
+              Le mot de passe doit contenir au moins 6 caractères
+            </div>
+          </div>
+        </div>
+        <div class="form-group row my-4 input-cust">
+          <label for="name" class="col-md-2 title primary-color py-2">Nom</label>
+          <input
+            type="text"
+            class="col-md-4"
+            name="name"
+            [(ngModel)]="form.name"
+            #name="ngModel"
+          />
+        </div>
+        <div class="form-group row my-4 input-cust">
+          <label for="firstname" class="col-md-2 title primary-color py-2">Prénom</label>
+          <input
+            type="text"
+            class="col-md-4"
+            name="firstName"
+            [(ngModel)]="form.firstname"
+            #firstname="ngModel"
+          />
+        </div>
+        <div class="form-group row my-4 input-cust">
+          <label for="birthday" class="col-md-2 title primary-color py-2">Anniversaire</label>
+          <input
+            type="date"
+            name="birthday"
+            class="col-md-4"
+            [(ngModel)]="form.birthday"
+            #birthday="ngModel"
+          />
+        </div>
+        <div class="form-group row my-4 input-cust">
+          <label for="color" class="col-md-2 title primary-color py-2">Couleur</label>
+          <input
+            type="text"
+            name="color"
+            class="col-md-4"
+            [(ngModel)]="form.color"
+            #name="ngModel"
+          />
+        </div>
+        <div class="form-group row my-4 input-cust">
+          <label for="thumbnail" class="col-md-2 title primary-color py-2">Miniature</label>
+          <input
+            type="file"
+            class="col-md-4"
+            name="thumbnail"
+            [(ngModel)]="form.thumbnail"
+            #thumbnail="ngModel"
+            accept="image/png, image/jpeg" 
+            (change)="onSelectFile($event)"
+          />
+        </div>
+        <div class="row" *ngIf="imagePath">
+          <div class="d-flex justify-content-center col-md-6" >
+            <img [src]="imagePath"  class="member-thumbnail">
+          </div>
+        </div>
+        <div class="d-flex justify-content-end col-md-6 mt-5">
+          <button class="add-btn-word">Enregistrer</button>
+        </div>
+
+        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+          L'enregistrement a échoué<br />{{ errorMessage }}
+        </div>
+      </form>
+
+      <div class="alert alert-success" *ngIf="isSuccessful">
+        Votre marin a bien été enregistré
+        <button class="add-btn-word" (click)="getLoginPage()">Se connecter</button>
+      </div>
+    </div>
+  </div>
+</div>

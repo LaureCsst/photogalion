@@ -19,7 +19,6 @@ export class MemberFormComponent implements OnInit {
   isSaved:Boolean;
   thumbnail:any;
   event: Event;
-  imageUrl:any;
 
   public imagePath:any;
   imgURL: any;
@@ -28,7 +27,7 @@ export class MemberFormComponent implements OnInit {
 
   checkoutForm = this.formBuilder.group({
     name: '',
-    firstname:'',
+    firstName:'',
     pseudo:new FormControl("",Validators.required),
     birthday: '',
     mail:new FormControl("",Validators.required),
@@ -46,6 +45,7 @@ export class MemberFormComponent implements OnInit {
 
   onSubmit(): String | undefined {
     if (this.checkoutForm.invalid) {
+      console.log(this.checkoutForm);
       if(this.checkoutForm.status==null){
       this.isSaved=false;
       this.messageReturn= "Certains champs sont obligatoires !!!";
@@ -57,8 +57,6 @@ export class MemberFormComponent implements OnInit {
     try {
       // ... map les valeurs 
     this.memberFormDto= { ...this.checkoutForm.value}
-    console.log("Regarde là:")
-    console.log(this.thumbnail);
     this.memberFormDto.thumbnail=this.thumbnail;
     this.memberService.onAddMember(this.memberFormDto);
     console.warn('Votre marin a été créé', this.memberFormDto);
@@ -67,7 +65,7 @@ export class MemberFormComponent implements OnInit {
     this.isSaved=true;
     return this.messageReturn;
     } catch (error) {
-      return
+      return this.messageReturn;
     }
   }
 
@@ -93,8 +91,7 @@ export class MemberFormComponent implements OnInit {
     this.imagePath = file;
     reader.readAsDataURL(file); 
     reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
-      console.log(this.imgURL);
+      this.thumbnail = reader.result;
     }
   }
      

@@ -2,7 +2,9 @@ package fr.coussout.Photogalion.service;
 
 import fr.coussout.Photogalion.dao.*;
 import fr.coussout.Photogalion.entities.Category;
+import fr.coussout.Photogalion.entities.ERole;
 import fr.coussout.Photogalion.entities.Member;
+import fr.coussout.Photogalion.entities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +35,9 @@ public class PhotoGalionServiceImpl implements IPhotogalionService{
 	private PictureCategoryRepository pictureCategoryRepository;
 	@Autowired
 	private MemberGalleonRepository memberGalleonRepository;
-	
+	@Autowired
+	private RoleRepository roleRepository;
+
 
 	public PhotoGalionServiceImpl() {
 		// TODO Auto-generated constructor stub
@@ -51,7 +55,6 @@ public class PhotoGalionServiceImpl implements IPhotogalionService{
 						member.setFirstName(name);
 						member.setColor(randomColors[new Random().nextInt(randomColors.length)]);
 						member.setPseudo("Marin " + name);
-						member.setThumbnail("thumb"+index);
 						member.setMail(name+"@free.fr");
 						member.setPassword("PasEncoreDePassword");
 						memberRepository.save(member);
@@ -67,6 +70,14 @@ public class PhotoGalionServiceImpl implements IPhotogalionService{
 			categoryRepository.save(category);
 		});
 		
+	}
+	@Override
+	public void initRole(){
+		Stream.of(ERole.ROLE_USER,ERole.ROLE_MODERATOR,ERole.ROLE_ADMIN).forEach(label->{
+			Role role= new Role();
+			role.setName(label);
+			roleRepository.save(role);
+		});
 	}
 
 }

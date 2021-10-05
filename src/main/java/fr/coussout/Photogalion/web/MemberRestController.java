@@ -10,6 +10,7 @@ import fr.coussout.Photogalion.dto.MemberRecapDto;
 import fr.coussout.Photogalion.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
@@ -50,33 +51,15 @@ public class MemberRestController {
 		memberService.delete(id);
 	}
 
-	@PostMapping("/add")
-	public String addMember(@Valid @RequestBody MemberFormDtoFile memberFormDtoFile, BindingResult result) throws Exception {
-		System.out.println("Ok ................");
-		boolean isExit = new File(context.getRealPath("/Images/")).exists();
-		if(!isExit){
-			new File(context.getRealPath("/Images/")).mkdir();
-			System.out.println(context.getRealPath("/Images/"));
-			System.out.println("mkdir ..........");
-		}
-     	MemberFormDto memberFormDto = new MemberFormDto();
-		memberFormDto.birthday=memberFormDtoFile.birthday;
-		memberFormDto.color=memberFormDtoFile.color;
-
-		memberFormDto.pseudo=memberFormDtoFile.pseudo;
-		memberFormDto.mail=memberFormDtoFile.mail;
-
-		memberFormDto.name=memberFormDtoFile.name;
-		memberFormDto.firstName=memberFormDtoFile.firstName;
-		memberFormDto.password=memberFormDtoFile.password;
-		System.out.println(memberFormDtoFile.thumbnail);
-		memberFormDto.thumbnail=memberFormDtoFile.thumbnail.getName();
-		//System.out.println(file.getOriginalFilename());
+	@PostMapping(value = "/add")
+	public String addMember(@Valid @RequestBody MemberFormDto memberFormDto, BindingResult result) throws Exception {
+		System.out.println("Salut");
 		return memberService.add(memberFormDto);
 	}
 
 	@PutMapping("/update/{id}")
 	public String updateMember(@Valid @RequestBody MemberFormDto memberFormDto, BindingResult result, @PathVariable("id") Long id) throws Exception {
+		System.out.println("Bonjour");
 		return memberService.update(memberFormDto, id);
 	}
 }

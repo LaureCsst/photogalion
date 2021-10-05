@@ -7,7 +7,7 @@
             <ul *ngIf="members" class="row" >
                 <li *ngFor="let m of members"  (click)="onGetMember(m.id)" [routerLink]="['/member-detail', m.id]" class="text-center col-md-4 clickable mt-2">
                     <div class="col-md-2 col-xs-12">
-                        <img src="assets\member\thumbnails\{{m.thumbnail}}.jpg" alt="Avatar" class="member-thumbnail">
+                        <img src="{{m.thumbnail}}" alt="Avatar" class="member-thumbnail">
                     </div>
                     <div class="secondary-color title text-center clickable"> 
                         {{m.pseudo}}

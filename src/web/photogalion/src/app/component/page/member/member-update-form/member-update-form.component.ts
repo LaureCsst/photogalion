@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MemberFormDto } from 'src/app/models/member';
 import { MemberService } from 'src/app/services/member.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-member-update-form',
@@ -14,19 +15,23 @@ export class MemberUpdateFormComponent implements OnInit {
   messageReturn:String;
   isSaved:Boolean;
   member: any;
+  thumbnail:any;
+  imagePath: any;
+  event: Event;
 
   checkoutForm = this.formBuilder.group({
     name: "",
-    firstname:"",
+    firstName:"",
     pseudo:new FormControl("",Validators.required),
     birthday: "",
     mail:new FormControl("",Validators.required),
     password:new FormControl("",Validators.required),
-    color:""
+    color:"",
+    thumbnail:"",
   }); 
 
 
-  constructor( private router: Router, public memberService: MemberService,private formBuilder: FormBuilder,private activatedRoute: ActivatedRoute) { }
+  constructor( private router: Router, public memberService: MemberService,private formBuilder: FormBuilder,private activatedRoute: ActivatedRoute, private _sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
   this.getMember(this.activatedRoute.snapshot.params.id) 
@@ -36,6 +41,7 @@ export class MemberUpdateFormComponent implements OnInit {
     this.memberService.onGetMember(id).
     subscribe(data=>{
       this.member=data;
+      this.thumbnail = (this._sanitizer.bypassSecurityTrustResourceUrl(this.member.thumbnail) as any).changingThisBreaksApplicationSecurity;
     },err=>{
       console.log(err);
     })
@@ -59,7 +65,6 @@ export class MemberUpdateFormComponent implements OnInit {
     //If field of form null take the value print by bdd
     if(!this.memberFormDto.pseudo){
       this.memberFormDto.pseudo=this.member.pseudo;
-      console.log("Le pseudo est : " + this.member.pseudo)
     }
     
     if(!this.memberFormDto.name){
@@ -85,6 +90,20 @@ export class MemberUpdateFormComponent implements OnInit {
     if(!this.memberFormDto.mail){
       this.memberFormDto.mail=this.member.mail;
     }
+
+    if(!this.memberFormDto.thumbnail){
+      console.log("Je passe ici");
+      this.memberFormDto.thumbnail=this.member.thumbnail;
+    }else{
+      console.log("Je passe Là memberForm : ");
+      console.log(this.memberFormDto.thumbnail);
+      
+      console.log("Je passe Là thumbnail : ");
+      console.log(this.thumbnail);
+      this.memberFormDto.thumbnail=this.thumbnail;
+    };
+
+
     this.memberService.onUpdateMember(this.memberFormDto, this.activatedRoute.snapshot.params.id);
     console.warn('Votre marin a été modifié', this.memberFormDto);
     this.checkoutForm.reset(); 
@@ -92,7 +111,7 @@ export class MemberUpdateFormComponent implements OnInit {
     this.isSaved=true;
     return this.messageReturn;
     } catch (error) {
-      return
+      return this.messageReturn;
     }
   }
 
@@ -100,6 +119,28 @@ export class MemberUpdateFormComponent implements OnInit {
     this.router.navigate(['/member']);
   }
 
+  onSelectFile(event:any) {
+    if (event.target.files.length > 0)
+    {
+      const file = event.target.files[0];
+      this.thumbnail = file;
+     // this.f['profile'].setValue(file);
+ 
+    var mimeType = event.target.files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.messageReturn = "Seules les images sont supportées pour la miniature";
+      return;
+    }
+ 
+    var reader = new FileReader();
+    
+    this.imagePath = file;
+    reader.readAsDataURL(file); 
+    reader.onload = (_event) => { 
+      this.thumbnail = reader.result;
+    }
+  }
+
 }
 
-
+}

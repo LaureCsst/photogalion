@@ -3,19 +3,10 @@ package fr.coussout.Photogalion.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-
-import lombok.RequiredArgsConstructor;
-import org.aspectj.lang.annotation.RequiredTypes;
-import org.springframework.beans.factory.annotation.Required;
+import javax.persistence.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Entity
@@ -30,6 +21,7 @@ public class Member implements Serializable {
 	public String mail;
 	public String password;
 	public Date birthday;
+	@Lob
 	public String thumbnail;
 	public String color;
 	@OneToMany(mappedBy = "member")
@@ -40,6 +32,12 @@ public class Member implements Serializable {
 	public Collection<MemberGalleonAssociation> getMemberGalleon() {
 		return memberGalleon;
 	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(	name = "member_roles",
+			joinColumns = @JoinColumn(name = "member_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 
 	public void setMemberGalleon(Collection<MemberGalleonAssociation> memberGalleon) {
 		this.memberGalleon = memberGalleon;
@@ -125,9 +123,27 @@ public class Member implements Serializable {
 		this.pictures = pictures;
 	}
 
-	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 	public Member() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Member(String pseudo, String mail, String password, String firstName, String name, String color, String thumbnail, Date birthday) {
+		this.pseudo = pseudo;
+		this.mail = mail;
+		this.password = password;
+		this.firstName=firstName;
+		this.name=name;
+		this.color=color;
+		this.thumbnail=thumbnail;
+		this.birthday=birthday;
 	}
 
 }

@@ -43,10 +43,10 @@
         </div>
   
         <div class="row  my-4 input-cust">
-          <label for="firstname" class="col-md-2 title primary-color py-2">
+          <label for="firstName" class="col-md-2 title primary-color py-2">
             Prénom
           </label>
-          <input value="{{member.firstName}}" placeholder="{{member.firstname}}" id="firstname" type="text" formControlName="firstname" class="col-md-4">
+          <input value="{{member.firstName}}" placeholder="{{member.firstName}}" id="firstName" type="text" formControlName="firstName" class="col-md-4">
         </div>
   
         
@@ -64,6 +64,20 @@
         </label>
         <input value="{{member.color}}" placeholder="{{member.color}}" id="color" type="text" formControlName="color" class="col-md-4">
       </div>
+
+      
+    <div class="row  my-4 input-cust">
+      <label for="thumbnail" class="col-md-2 title primary-color my-2">
+        Miniature
+      </label>
+      <input id="thumbnail" type="file" formControlName="thumbnail" class="col-md-4 " accept="image/png, image/jpeg" (change)="onSelectFile($event)" >
+    </div>
+    <div class="row">
+    <div class="d-flex justify-content-center col-md-6">
+      <img [src]="thumbnail" *ngIf="thumbnail || imagePath" class="member-thumbnail">
+    </div>
+  </div>
+
       <div>
         {{messageReturn}}
       </div>

@@ -81,6 +81,7 @@ public class MemberService {
        Member member= memberRepository.findById(id).get();
        Member memberForm=memberFormMapper.dtoToEntity(memberFormDto);
        //Add new value from Form
+        System.out.println(memberForm);
        member.setFirstName(memberForm.getFirstName());
        member.setName(memberForm.getName());
        member.setPseudo(memberForm.getPseudo());
@@ -88,6 +89,7 @@ public class MemberService {
        member.setPassword(memberForm.getPassword());
        member.setBirthday(memberForm.getBirthday());
        member.setColor(memberForm.getColor());
+       member.setThumbnail(memberForm.getThumbnail());
        //Validate value and return result
         HashMap<Boolean, String> validation = isValid(member);
         //Iterate on the map, if validation is ok persist member
@@ -97,9 +99,6 @@ public class MemberService {
                 return entry.getValue();
             }
 
-        }
-        if(member.getThumbnail()==null){
-            member.setThumbnail("thumb0");
         }
         memberRepository.save(member);
         return "Le membre a été ajouté";

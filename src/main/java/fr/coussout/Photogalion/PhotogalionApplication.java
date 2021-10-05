@@ -22,6 +22,7 @@ public class PhotogalionApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		photogalionInitService.initCategory();
 		photogalionInitService.initMember();
+		photogalionInitService.initRole();
 	}
 
 }

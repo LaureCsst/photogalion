@@ -8,7 +8,7 @@
         <button class="add-btn-word" (click)="getMembersPage()">Retour</button>
     </div>
   </div>
-    <div class="primary-color title-big">
+    <div class="primary-color title-big" *ngIf="!this.isSaved">
       Créez votre Marin :
     </div>
 
@@ -43,10 +43,10 @@
       </div>
 
       <div class="row  my-4 input-cust">
-        <label for="firstname" class="col-md-2 title primary-color py-2">
+        <label for="firstName" class="col-md-2 title primary-color py-2">
           Prénom
         </label>
-        <input id="firstname" type="text" formControlName="firstname" class="col-md-4">
+        <input id="firstName" type="text" formControlName="firstName" class="col-md-4">
       </div>
 
       
@@ -67,11 +67,15 @@
     
     <div class="row  my-4 input-cust">
       <label for="thumbnail" class="col-md-2 title primary-color my-2">
-        Couleur
+        Miniature
       </label>
       <input id="thumbnail" type="file" formControlName="thumbnail" class="col-md-4 " accept="image/png, image/jpeg" (change)="onSelectFile($event)" >
-      <img [src]="imgURL" *ngIf="imgURL" class="member-thumbnail">
     </div>
+    <div class="row">
+    <div class="d-flex justify-content-center col-md-6">
+      <img [src]="thumbnail" *ngIf="thumbnail" class="member-thumbnail">
+    </div>
+  </div>
     <div>
       {{messageReturn}}
     </div>

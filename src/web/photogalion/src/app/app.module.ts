@@ -10,7 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MemberDetailComponent } from './component/page/member/member-detail/member-detail.component';
 import { MemberFormComponent } from './component/page/member/member-form/member-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MemberUpdateFormComponent } from './component/page/member/member-update-form/member-update-form.component'
+import { MemberUpdateFormComponent } from './component/page/member/member-update-form/member-update-form.component';
+
+import { LoginComponent } from './component/page/member/login/login.component';
+import { RegisterComponent } from './component/page/member/register/register.component';
+
+import { BoardAdminComponent } from './component/page/member/board-admin/board-admin.component';
+import { BoardUserComponent } from './component/page/member/board-user/board-user.component';
+import { ProfileComponent } from './component/page/member/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +27,11 @@ import { MemberUpdateFormComponent } from './component/page/member/member-update
     MemberDetailComponent,
     MemberFormComponent,
     MemberUpdateFormComponent,
+    LoginComponent,
+    RegisterComponent,
+    BoardAdminComponent,
+    BoardUserComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule, 
