@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MemberService {
-  public host:string="http://localhost:8080"
+  public host:string="http://localhost:8080/api/auth"
   constructor(private http:HttpClient) { }
   message:string;
   public API_URL : 'http://localhost:8080/api/test/';

@@ -64,8 +64,10 @@
         </div>
       </form>
 
-      <div class="alert alert-success" *ngIf="isLoggedIn">
-        Logged in as {{ roles }}.
+      <div class="border-dashed title d-flex col-md-2 justified-content-center secondary-color text-center" *ngIf="isLoggedIn">
+        <div class="py-3 px-3">
+        Vous êtes connecté.e.
+      </div>
       </div>
     </div>
   </div>

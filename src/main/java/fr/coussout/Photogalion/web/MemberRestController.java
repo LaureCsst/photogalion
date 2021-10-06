@@ -26,7 +26,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/marin")
+@RequestMapping("api/auth/marin")
 @CrossOrigin("*")
 @Component
 public class MemberRestController {

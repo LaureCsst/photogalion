@@ -1,6 +1,7 @@
 import { MemberService } from "../../../../services/member.service";
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TokenStorageService } from '../../../../services/connectionService/tokenStorage/token-storage.service';
 
 
 
@@ -17,11 +18,27 @@ export class MemberComponent implements OnInit {
   public imageUrl:any;
   public imagePath:any;
   public thumbnail: any;
+  isLoggedIn = false;
+  isLoginFailed = false;
+  roles: string[] = [];
+  user:any;
+  content = '';
 
-  constructor(public memberService:MemberService, private _sanitizer: DomSanitizer) { }
+
+  constructor(public memberService:MemberService, private _sanitizer: DomSanitizer, private tokenStorage:TokenStorageService ) { }
 
   ngOnInit(): void {
-    this.getMembers();
+    this.isLoggedIn = !!this.tokenStorage.getToken();
+    
+    if (this.isLoggedIn) {
+      console.log("Je passe là 2");
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+      this.user = this.tokenStorage.getUser();
+      this.getMembers();
+         }
+         
+    
   }
 
   

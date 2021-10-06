@@ -84,7 +84,7 @@ public class AuthController {
         if (memberRepository.existsByMail(signUpRequest.getMail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
+                    .body(new MessageResponse("Erreur: Cet email est déjà enregistré"));
         }
 
         // Create new Member's account
