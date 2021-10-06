@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MemberService } from 'src/app/services/member.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TokenStorageService } from 'src/app/services/connectionService/tokenStorage/token-storage.service';
 
 
 @Component({
@@ -14,12 +15,22 @@ export class MemberDetailComponent implements OnInit {
   imageUrl:any;
   imageBase64String:any;
   imageBase64:any;
+  currentUser:any;
+  isCurrentMember:boolean=false;
   
   constructor(public memberService: MemberService, private activatedRoute: ActivatedRoute,
-    private router: Router, private _sanitizer: DomSanitizer) { }
+    private router: Router, private _sanitizer: DomSanitizer, private token: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getMember(this.activatedRoute.snapshot.params.id);
+    this.currentUser = this.token.getUser();
+    
+    if(this.currentUser==this.member){
+      this.isCurrentMember=true;
+    }
+    console.log(this.currentUser);
+    console.log(this.member);
+    console.log(this.isCurrentMember);
   }
 
   public getMember(id:any){
@@ -33,6 +44,7 @@ export class MemberDetailComponent implements OnInit {
   }
 
   public onDeleteMember(id:any){
+    
     this.memberService.onDeleteMember(id).
     subscribe(data=>{
       this.member=data;

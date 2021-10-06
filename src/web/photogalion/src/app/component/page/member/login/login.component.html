@@ -8,7 +8,7 @@
         #f="ngForm"
         novalidate
       >
-        <div class="form-group input-cust">
+        <div class="form-group input-cust py-2">
           <label for="username" class="col-md-2 title primary-color py-2">Pseudo</label>
           <input
             type="text"
@@ -19,15 +19,15 @@
             #username="ngModel"
           />
           <div
-            class="alert alert-danger"
+            class="title justified-content-end primary-color col-md-6 text-end py-2"
             role="alert"
             *ngIf="f.submitted && username.invalid"
           >
             Le pseudo est obligatoire
           </div>
         </div>
-        <div class="form-group input-cust">
-          <label for="password" class="col-md-2 title primary-color py-2">Mot de passe</label>
+        <div class="form-group input-cust py-2">
+          <label for="password" class="title primary-color py-2 col-md-2">Mot de passe</label>
           <input
             type="password"
             class="col-md-4 "
@@ -38,34 +38,34 @@
             #password="ngModel"
           />
           <div
-            class="alert alert-danger"
+            class="title justified-content-end primary-color col-md-6 text-end py-2"
             role="alert"
             *ngIf="f.submitted && password.invalid"
           >
-            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.required">Le mot de passe est requis</div>
             <div *ngIf="password.errors.minlength">
               Le mot de passe doit contenir au moins 6 caractères
             </div>
           </div>
         </div>
-        <div class="form-group py-5">
+        <div class="d-flex justify-content-end col-md-6 mt-5">
           <button class="add-btn-word">
             Ok
           </button>
         </div>
-        <div class="form-group">
+        <div class="title col-md-6 justified-content-end primary-color" *ngIf="f.submitted && isLoginFailed">
           <div
-            class="alert alert-danger"
+            class="py-3 px-3 text-end"
             role="alert"
-            *ngIf="f.submitted && isLoginFailed"
+            
           >
-            Login failed: {{ errorMessage }}
+            Votre identification a échoué
           </div>
         </div>
       </form>
 
       <div class="border-dashed title d-flex col-md-2 justified-content-center secondary-color text-center" *ngIf="isLoggedIn">
-        <div class="py-3 px-3">
+        <div class="py-3 px-3 text-center">
         Vous êtes connecté.e.
       </div>
       </div>

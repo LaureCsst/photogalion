@@ -133,9 +133,14 @@
         </div>
       </form>
 
-      <div class="alert alert-success" *ngIf="isSuccessful">
-        Votre marin a bien été enregistré
-        <button class="add-btn-word" (click)="getLoginPage()">Se connecter</button>
+      <div class="border-dashed title d-flex col-md-6 justified-content-center secondary-color text-center py-2" *ngIf="isSuccessful">
+        <div class="col-md-8 py-2">
+          Votre marin a bien été enregistré
+        </div>
+        <div class="col-md-4 py-2">
+          <button class="add-btn-word" (click)="getLoginPage()">Se connecter</button>
+        </div>
+       
       </div>
     </div>
   </div>
