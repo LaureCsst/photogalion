@@ -1,4 +1,4 @@
-package fr.coussout.Photogalion.dto;
+package fr.coussout.Photogalion.dto.member;
 
 import lombok.Data;
 

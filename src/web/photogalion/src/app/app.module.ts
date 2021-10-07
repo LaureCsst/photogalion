@@ -18,6 +18,8 @@ import { RegisterComponent } from './component/page/member/register/register.com
 import { BoardAdminComponent } from './component/page/member/board-admin/board-admin.component';
 import { BoardUserComponent } from './component/page/member/board-user/board-user.component';
 import { ProfileComponent } from './component/page/member/profile/profile.component';
+import { PictureComponent } from './component/page/picture/picture/picture.component';
+import { PictureFormComponent } from './component/page/picture/picture-form/picture-form.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ProfileComponent } from './component/page/member/profile/profile.compon
     RegisterComponent,
     BoardAdminComponent,
     BoardUserComponent,
-    ProfileComponent
+    ProfileComponent,
+    PictureComponent,
+    PictureFormComponent
   ],
   imports: [
     BrowserModule, 

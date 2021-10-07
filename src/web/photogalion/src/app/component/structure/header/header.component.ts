@@ -7,17 +7,15 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   isLoggedIn:boolean=false;
   constructor(public tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit(): void {
-    
     this.isLoggedIn = !!this.tokenStorage.getToken();
-
-
   }
-
+  ngOnChanges(): void {
+    window.location.reload();
+  }
   onSignOut(){
     this.tokenStorage.signOut();
     this.router.navigate(['/login']);

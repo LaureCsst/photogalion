@@ -22,15 +22,8 @@ export class MemberDetailComponent implements OnInit {
     private router: Router, private _sanitizer: DomSanitizer, private token: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.getMember(this.activatedRoute.snapshot.params.id);
     this.currentUser = this.token.getUser();
-    
-    if(this.currentUser==this.member){
-      this.isCurrentMember=true;
-    }
-    console.log(this.currentUser);
-    console.log(this.member);
-    console.log(this.isCurrentMember);
+    this.getMember(this.activatedRoute.snapshot.params.id);
   }
 
   public getMember(id:any){
@@ -38,6 +31,9 @@ export class MemberDetailComponent implements OnInit {
     subscribe(data=>{
       this.member=data;
       this.imageUrl = (this._sanitizer.bypassSecurityTrustResourceUrl(this.member.thumbnail) as any).changingThisBreaksApplicationSecurity;
+      if(this.currentUser.id==this.member.id){
+        this.isCurrentMember=true;
+      }
     },err=>{
       console.log(err);
     })

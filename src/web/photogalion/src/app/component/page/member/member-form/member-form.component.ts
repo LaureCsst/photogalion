@@ -45,10 +45,9 @@ export class MemberFormComponent implements OnInit {
 
   onSubmit(): String | undefined {
     if (this.checkoutForm.invalid) {
-      console.log(this.checkoutForm);
       if(this.checkoutForm.status==null){
       this.isSaved=false;
-      this.messageReturn= "Certains champs sont obligatoires !!!";
+      this.messageReturn= "Certains champs sont obligatoires";
       return this.messageReturn;
       }
     }

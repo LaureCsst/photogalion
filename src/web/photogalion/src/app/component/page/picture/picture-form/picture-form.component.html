@@ -1,0 +1,39 @@
+<div class="container pt-5">
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="d-flex border-dashed py-2 pl-4 justify-content-center" *ngIf="this.isSaved" >
+      <div class="secondary-color title-big col-md-4" >
+        {{messageReturn}}
+      </div>
+      <div class="col-md-4">
+          <button class="add-btn-word" >Retour</button>
+      </div>
+    </div>
+      <div class="primary-color title-big" *ngIf="!this.isSaved">
+        Insérez votre photo :
+      </div>
+      <div class="secondary-color text py-5" *ngIf="!this.isSaved">
+        Vos photos apparaîtront rognées, néanmoins elles seront enregistrées dans leurs formats originels. 
+      </div>
+      <div class="row  my-4 input-cust">
+        <label for="image" class="col-md-2 title primary-color my-2">
+          Miniature
+        </label>
+        <input id="image" type="file" formControlName="image" class="col-md-4 " accept="image/png, image/jpeg" (change)="onSelectFile($event)" >
+      </div>
+      <div class="row">
+      <div class="d-flex justify-content-center">
+        <img [src]="image" *ngIf="image" class="pix-medium">
+      </div>
+    </div>
+      <div>
+        {{messageReturn}}
+      </div>
+      <div>
+      </div>
+      <div class="d-flex justify-content-center  pt-5">
+        <button class="add-btn-word" type="submit" [disabled]="!checkoutForm.valid" [ngClass]="!checkoutForm.valid?'disable-btn':''" >
+            Ok
+        </button>
+      </div>
+    </form>
+  </div>

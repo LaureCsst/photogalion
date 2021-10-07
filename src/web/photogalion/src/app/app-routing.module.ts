@@ -9,7 +9,9 @@ import { LoginComponent } from './component/page/member/login/login.component';
 import { ProfileComponent } from './component/page/member/profile/profile.component';
 import { BoardUserComponent } from './component/page/member/board-user/board-user.component';
 import { BoardAdminComponent } from './component/page/member/board-admin/board-admin.component';
+import { PictureFormComponent } from './component/page/picture/picture-form/picture-form.component';
 const routes: Routes = [
+  //Member
   {
     path: "member", 
     component: MemberComponent
@@ -26,12 +28,20 @@ const routes: Routes = [
     path: "member-update-form/:id", 
     component: MemberUpdateFormComponent
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'user', component: BoardUserComponent },
-  { path: 'admin', component: BoardAdminComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  //Login & register
+  { 
+    path: 'login', 
+    component: LoginComponent 
+  },
+  { 
+    path: 'register', 
+    component: RegisterComponent 
+  },
+  
+  { 
+    path: 'picture-form', 
+    component: PictureFormComponent 
+  },
 ];
 
 @NgModule({

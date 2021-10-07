@@ -4,14 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Picture implements Serializable {
@@ -19,6 +12,8 @@ public class Picture implements Serializable {
 	public Long id;
 	public String name;
 	public Date date;
+	@Lob
+	public String image;
 	@ManyToOne
 	public Member member;
 	@OneToOne
@@ -105,4 +100,20 @@ public class Picture implements Serializable {
 		this.date = date;
 	}
 
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Collection<PictureCategoryAssociation> getPictureCategory() {
+		return pictureCategory;
+	}
+
+	public void setPictureCategory(Collection<PictureCategoryAssociation> pictureCategory) {
+		this.pictureCategory = pictureCategory;
+	}
 }

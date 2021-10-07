@@ -8,33 +8,33 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MemberService {
-  public host:string="http://localhost:8080/api/auth"
-  constructor(private http:HttpClient) { }
+  public host:string="http://localhost:8080/api/auth/marin"
+  
   message:string;
   public API_URL : 'http://localhost:8080/api/test/';
-
+  constructor(private http:HttpClient) { }
   public getMembers() {
-    return this.http.get(this.host+"/marin/all-recap");
+    return this.http.get(this.host+"/all-recap");
   };
 
   public onGetMember(id:number){
-    return this.http.get(this.host+"/marin/profil/" + id);
+    return this.http.get(this.host+"/profil/" + id);
   }
   public onDeleteMember(id:number){
-    return this.http.get(this.host+"/marin/delete/" + id);
+    return this.http.get(this.host+"/delete/" + id);
   }
   public onAddMember(member:MemberFormDto){
-    this.http.post(this.host+"/marin/add", member).subscribe(data=>{
+    this.http.post(this.host+"/add", member).subscribe(data=>{
     });
 
   }
   public onValidationForm(){
-    this.http.get(this.host+"/marin/add").subscribe(message=>{
+    this.http.get(this.host+"/add").subscribe(message=>{
 
     });
   }
   public onUpdateMember(member:MemberFormDto, id:number){
-    this.http.put(this.host+"/marin/update/"+id, member).subscribe(data=>{
+    this.http.put(this.host+"/update/"+id, member).subscribe(data=>{
     });
   }
 

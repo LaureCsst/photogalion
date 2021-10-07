@@ -1,6 +1,6 @@
-package fr.coussout.Photogalion.mapper;
+package fr.coussout.Photogalion.mapper.member;
 
-import fr.coussout.Photogalion.dto.MemberRecapDto;
+import fr.coussout.Photogalion.dto.member.MemberRecapDto;
 import fr.coussout.Photogalion.entities.Member;
 import org.mapstruct.Mapper;
 

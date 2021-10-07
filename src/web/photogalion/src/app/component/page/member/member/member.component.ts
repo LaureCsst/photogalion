@@ -23,6 +23,8 @@ export class MemberComponent implements OnInit {
   roles: string[] = [];
   user:any;
   content = '';
+  isAdmin: boolean=false;
+
 
 
   constructor(public memberService:MemberService, private _sanitizer: DomSanitizer, private tokenStorage:TokenStorageService ) { }
@@ -31,7 +33,6 @@ export class MemberComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorage.getToken();
     
     if (this.isLoggedIn) {
-      console.log("Je passe là 2");
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
       this.user = this.tokenStorage.getUser();
