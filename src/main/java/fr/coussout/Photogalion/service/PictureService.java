@@ -32,9 +32,19 @@ public class PictureService {
             Member member=new Member();
             member=memberRepository.getById(p.memberId);
             picture.member=member;
-            System.out.println(picture.member);
             pictureRepository.save(picture);
         }
         return "La photo a été ajoutée";
+    }
+
+    public List<PictureFormDto>  readPicturesFromUser(Long id){
+        List<Picture> pictures=pictureRepository.findPicturesByUser(id);
+        List<PictureFormDto> picturesFormDto = null;
+        for (Picture p: pictures
+             ) {
+            PictureFormDto pictureFormDto= pictureFormMapper.entityToDto(p);
+            picturesFormDto.add(pictureFormDto);
+        }
+        return picturesFormDto;
     }
 }
