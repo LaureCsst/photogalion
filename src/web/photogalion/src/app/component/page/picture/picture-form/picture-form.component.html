@@ -9,20 +9,20 @@
       </div>
     </div>
       <div class="primary-color title-big" *ngIf="!this.isSaved">
-        Insérez votre photo :
+        Insérez vos photos :
       </div>
       <div class="secondary-color text py-5" *ngIf="!this.isSaved">
         Vos photos apparaîtront rognées, néanmoins elles seront enregistrées dans leurs formats originels. 
       </div>
       <div class="row  my-4 input-cust">
         <label for="image" class="col-md-2 title primary-color my-2">
-          Miniature
+          Photos
         </label>
-        <input id="image" type="file" formControlName="image" class="col-md-4 " accept="image/png, image/jpeg" (change)="onSelectFile($event)" >
+        <input id="image" type="file" multiple formControlName="image" class="col-md-4 " accept="image/png, image/jpeg" (change)="onSelectFile($event)" >
       </div>
       <div class="row">
-      <div class="d-flex justify-content-center">
-        <img [src]="image" *ngIf="image" class="pix-medium">
+      <div class="d-flex justify-content-center col-md-3 pt-3" *ngFor="let image of images">
+        <img src="{{image.image}}" *ngIf="image.image" class="pix-medium">
       </div>
     </div>
       <div>

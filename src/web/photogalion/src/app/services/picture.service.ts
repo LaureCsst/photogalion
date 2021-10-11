@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { ArrayType } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { PictureFormDto } from '../models/pictureFormDto';
 
@@ -11,9 +12,8 @@ export class PictureService {
 
   constructor(private http:HttpClient) { }
 
-  public onAddPicture(picture:PictureFormDto){
-    console.log("Ici")
-    this.http.post(this.host+"/add", picture).subscribe(data=>{
+  public onAddPicture(images:ArrayType){
+    this.http.post(this.host+"/add", images).subscribe(data=>{
     });
 }
 }

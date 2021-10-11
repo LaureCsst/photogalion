@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface IPictureFormMapper {
-    Picture dtoToEntity(PictureFormDto memberFormDto);
+    Picture dtoToEntity(PictureFormDto pictureFormDto);
     PictureFormDto entityToDto(Picture picture);
 }

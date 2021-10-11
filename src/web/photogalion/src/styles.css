@@ -103,6 +103,7 @@ src: url(assets/font/ABeeZee-Italic.ttf) format("opentype");
     width: 15rem;
     border-radius: 5%;
     object-fit: cover;
+    box-shadow:  #2c387036 0px 8px 24px;
 }
 
 .input-cust input {
