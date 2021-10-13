@@ -14,10 +14,14 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorage.getToken();
   }
   ngOnChanges(): void {
+    this.isLoggedIn = !!this.tokenStorage.getToken();
     window.location.reload();
   }
   onSignOut(){
     this.tokenStorage.signOut();
-    this.router.navigate(['/login']);
+    this.isLoggedIn = !!this.tokenStorage.getToken();
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 }

@@ -27,13 +27,8 @@ public class PictureRestController {
     }
 
     //Get the picture of an user
-    @GetMapping("/{id}")
+    @GetMapping("/member/{id}")
         public List<PictureFormDto> readPicturesFromUser(@PathVariable("id") Long id) {
         return pictureService.readPicturesFromUser(id);
     }
-
-
-
-
-
 }

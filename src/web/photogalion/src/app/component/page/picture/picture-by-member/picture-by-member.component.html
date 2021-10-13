@@ -1,0 +1,9 @@
+
+<div class="container">
+    <div>Mes photos</div>
+    <div class="row">
+        <div class="d-flex justify-content-center col-md-3 pt-3" *ngFor="let image of pictures">
+           <img src="{{image.image}}" *ngIf="image.image" class="pix-medium">
+        </div>
+    </div>
+</div>

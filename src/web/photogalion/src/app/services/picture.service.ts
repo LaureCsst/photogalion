@@ -16,4 +16,8 @@ export class PictureService {
     this.http.post(this.host+"/add", images).subscribe(data=>{
     });
 }
+
+public onGetPictureByMember(id:number){
+  return this.http.get(this.host+"/member/"+id);
+}
 }

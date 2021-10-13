@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.coussout.Photogalion.dto.member.MemberDetailDto;
 import fr.coussout.Photogalion.dto.member.MemberFormDto;
+import fr.coussout.Photogalion.dto.member.MemberProfilDto;
 import fr.coussout.Photogalion.dto.member.MemberRecapDto;
 import fr.coussout.Photogalion.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class MemberRestController {
 	ServletContext context;
 
 	@GetMapping("/profil/{id}")
-	public MemberDetailDto readMember(@PathVariable("id") Long id) {
+	public MemberProfilDto readMember(@PathVariable("id") Long id) {
 		return memberService.findById(id);
 	}
 

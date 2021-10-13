@@ -10,6 +10,7 @@ import fr.coussout.Photogalion.mapper.picture.IPictureFormMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,8 @@ public class PictureService {
 
     public List<PictureFormDto>  readPicturesFromUser(Long id){
         List<Picture> pictures=pictureRepository.findPicturesByUser(id);
-        List<PictureFormDto> picturesFormDto = null;
+        System.out.println("Le tableau de photo "+pictures);
+        List<PictureFormDto> picturesFormDto = new ArrayList<PictureFormDto>();
         for (Picture p: pictures
              ) {
             PictureFormDto pictureFormDto= pictureFormMapper.entityToDto(p);

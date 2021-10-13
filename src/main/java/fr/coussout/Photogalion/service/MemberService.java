@@ -3,10 +3,12 @@ package fr.coussout.Photogalion.service;
 import fr.coussout.Photogalion.dao.MemberRepository;
 import fr.coussout.Photogalion.dto.member.MemberDetailDto;
 import fr.coussout.Photogalion.dto.member.MemberFormDto;
+import fr.coussout.Photogalion.dto.member.MemberProfilDto;
 import fr.coussout.Photogalion.dto.member.MemberRecapDto;
 import fr.coussout.Photogalion.entities.Member;
 import fr.coussout.Photogalion.mapper.member.IMemberDetailMapper;
 import fr.coussout.Photogalion.mapper.member.IMemberFormMapper;
+import fr.coussout.Photogalion.mapper.member.IMemberProfilMapper;
 import fr.coussout.Photogalion.mapper.member.IMemberRecapMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,8 @@ public class MemberService {
     private IMemberDetailMapper memberDetailMapper;
     @Autowired
     private IMemberFormMapper memberFormMapper;
+    @Autowired
+    private IMemberProfilMapper memberProfilMapper;
 
     public List<MemberRecapDto> findAllMembers(){
         List<Member> members= memberRepository.findAll();
@@ -34,11 +38,11 @@ public class MemberService {
         return memberRecapDtos;
     }
 
-    public MemberDetailDto findById(Long id) {
+    public MemberProfilDto findById(Long id) {
         Member member = memberRepository.findById(id).get();
-        MemberDetailDto memberDetailDto = new MemberDetailDto();
-        memberDetailDto= memberDetailMapper.entityToDto(member);
-        return memberDetailDto;
+        MemberProfilDto memberProfilDto = new MemberProfilDto();
+        memberProfilDto= memberProfilMapper.entityToDto(member);
+        return memberProfilDto;
     }
 
     public void delete(Long id){

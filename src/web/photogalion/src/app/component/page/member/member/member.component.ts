@@ -20,7 +20,6 @@ export class MemberComponent implements OnInit {
   public thumbnail: any;
   isLoggedIn = false;
   isLoginFailed = false;
-  roles: string[] = [];
   user:any;
   content = '';
   isAdmin: boolean=false;
@@ -34,7 +33,6 @@ export class MemberComponent implements OnInit {
     
     if (this.isLoggedIn) {
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
       this.user = this.tokenStorage.getUser();
       this.getMembers();
          }

@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PictureRepositoryCustom {
 
-    @Query(value="SELECT p FROM Picture p WHERE p.member_id=:id", nativeQuery = true)
+    @Query(value="SELECT * FROM Picture p WHERE p.member_id=:id", nativeQuery = true)
     public List<Picture> findPicturesByUser(@Param("id") Long id);
 }

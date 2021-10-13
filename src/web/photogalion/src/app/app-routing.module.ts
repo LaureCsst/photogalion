@@ -10,6 +10,7 @@ import { ProfileComponent } from './component/page/member/profile/profile.compon
 import { BoardUserComponent } from './component/page/member/board-user/board-user.component';
 import { BoardAdminComponent } from './component/page/member/board-admin/board-admin.component';
 import { PictureFormComponent } from './component/page/picture/picture-form/picture-form.component';
+import { PictureByMemberComponent } from './component/page/picture/picture-by-member/picture-by-member.component';
 const routes: Routes = [
   //Member
   {
@@ -37,10 +38,15 @@ const routes: Routes = [
     path: 'register', 
     component: RegisterComponent 
   },
-  
+  //Pictures
   { 
     path: 'picture-form', 
     component: PictureFormComponent 
+  },
+  {
+    path:'my-picture',
+    component: PictureByMemberComponent,
+
   },
 ];
 

@@ -20,6 +20,7 @@ import { BoardUserComponent } from './component/page/member/board-user/board-use
 import { ProfileComponent } from './component/page/member/profile/profile.component';
 import { PictureComponent } from './component/page/picture/picture/picture.component';
 import { PictureFormComponent } from './component/page/picture/picture-form/picture-form.component';
+import { PictureByMemberComponent } from './component/page/picture/picture-by-member/picture-by-member.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PictureFormComponent } from './component/page/picture/picture-form/pict
     BoardUserComponent,
     ProfileComponent,
     PictureComponent,
-    PictureFormComponent
+    PictureFormComponent,
+    PictureByMemberComponent
   ],
   imports: [
     BrowserModule, 
