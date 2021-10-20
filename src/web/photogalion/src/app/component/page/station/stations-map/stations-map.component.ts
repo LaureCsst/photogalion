@@ -28,6 +28,11 @@ export class StationsMapComponent implements OnInit {
         source: new OSM(),
       }),
        new TileLayer({
+      /* Extent donne l'emprise géographique dans laquelle récuperer les données.
+      Ici, l'emprise est la France, donc on ne pourra pas voir les données d'autres pays.
+      Il vaut mieux donc, ne pas la définir.
+      extent: [-932842, 6616605, 1141353, 5227285],
+      */
       source: new TileWMS({
         url: 'http://localhost:8080/geoserver/wms',
         params: {'LAYERS': 'workspace:test', 'TILED': true},
