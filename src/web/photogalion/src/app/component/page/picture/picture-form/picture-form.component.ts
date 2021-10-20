@@ -47,7 +47,7 @@ export class PictureFormComponent implements OnInit {
       this.pictureFormDto={ ...this.checkoutForm.value}; 
       this.pictureService.onAddPicture(this.images);
       this.checkoutForm.reset();
-      this.messageReturn=" Votre photo a bien été enregistrée";
+      this.messageReturn=" Vos photos ont bien été enregistrées";
       this.isSaved=true;
       return this.messageReturn;
     }catch(error){

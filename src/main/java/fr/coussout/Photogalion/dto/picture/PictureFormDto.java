@@ -5,10 +5,11 @@ import java.util.Date;
 
 @Data
 public class PictureFormDto {
+    public long id;
     public String name;
     public Date date;
     public String image;
-    public Long memberId;
-    public Long stationId;
-    public Long eventId;
+    public long memberId;
+    public long stationId;
+    public long eventId;
 }

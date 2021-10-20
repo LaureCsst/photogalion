@@ -106,6 +106,23 @@ src: url(assets/font/ABeeZee-Italic.ttf) format("opentype");
     box-shadow:  #2c387036 0px 8px 24px;
 }
 
+.image-div {
+    position: relative;
+    float:left;
+    margin:5px;}
+
+.image-div:hover .hidden_img
+  {
+  display: block;
+  }
+
+.image-div .hidden_img {
+    position:absolute;
+    bottom:1rem;
+    right:1rem;
+    display:none;
+}
+
 .input-cust input {
     border-radius: 15%;
     border-color: #2c3870;
@@ -121,6 +138,12 @@ src: url(assets/font/ABeeZee-Italic.ttf) format("opentype");
 .border-dashed {
     border: #2c387036 dashed;
 }
+
+#hotel_map {
+    height: 400px;
+    width: 100%;
+  }
+  
 @media only screen and (max-width: 767px) {
     .add-btn {
      display: inline-block;

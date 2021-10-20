@@ -11,6 +11,7 @@ import { BoardUserComponent } from './component/page/member/board-user/board-use
 import { BoardAdminComponent } from './component/page/member/board-admin/board-admin.component';
 import { PictureFormComponent } from './component/page/picture/picture-form/picture-form.component';
 import { PictureByMemberComponent } from './component/page/picture/picture-by-member/picture-by-member.component';
+import { StationsMapComponent } from './component/page/station/stations-map/stations-map.component';
 const routes: Routes = [
   //Member
   {
@@ -46,6 +47,12 @@ const routes: Routes = [
   {
     path:'my-picture',
     component: PictureByMemberComponent,
+
+  },
+  //Stations
+  {
+    path:'my-station',
+    component: StationsMapComponent,
 
   },
 ];

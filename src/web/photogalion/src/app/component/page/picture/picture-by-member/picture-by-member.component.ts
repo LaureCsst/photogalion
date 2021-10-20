@@ -13,6 +13,7 @@ export class PictureByMemberComponent implements OnInit {
   isLoginFailed = false;
   user:any;
   pictures:any;
+  picture:any;
   constructor(public pictureService:PictureService,  private _sanitizer: DomSanitizer,private tokenStorage:TokenStorageService) { }
 
   ngOnInit(): void {
@@ -32,11 +33,23 @@ export class PictureByMemberComponent implements OnInit {
       this.pictures=data;
       this.pictures.forEach((p:any) => {
         p.image=(this._sanitizer.bypassSecurityTrustResourceUrl(p.image) as any).changingThisBreaksApplicationSecurity;
+        console.log(p);
       });
     },err=>{
       console.log(err);
     })
 
+  }
+
+  public onDeleteMember(id:number){
+    
+    this.pictureService.onDeletePicture(id).
+    subscribe(data=>{
+      this.picture=data;
+      this.getPictureByMember(this.user.id);
+    },err=>{
+      console.log(err);
+    })  
   }
 
   

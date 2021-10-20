@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MemberService {
-  public host:string="http://localhost:8080/api/auth/marin"
+  public host:string="http://localhost:8081/api/auth/marin"
   
   message:string;
-  public API_URL : 'http://localhost:8080/api/test/';
+  public API_URL : 'http://localhost:8081/api/test/';
   constructor(private http:HttpClient) { }
   public getMembers() {
     return this.http.get(this.host+"/all-recap");

@@ -9,6 +9,7 @@ import fr.coussout.Photogalion.entities.Picture;
 import fr.coussout.Photogalion.mapper.picture.IPictureFormMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,15 +39,21 @@ public class PictureService {
         return "La photo a été ajoutée";
     }
 
+    @Transactional
     public List<PictureFormDto>  readPicturesFromUser(Long id){
         List<Picture> pictures=pictureRepository.findPicturesByUser(id);
-        System.out.println("Le tableau de photo "+pictures);
         List<PictureFormDto> picturesFormDto = new ArrayList<PictureFormDto>();
         for (Picture p: pictures
              ) {
             PictureFormDto pictureFormDto= pictureFormMapper.entityToDto(p);
+            pictureFormDto.id= p.id;
             picturesFormDto.add(pictureFormDto);
-        }
+        };
         return picturesFormDto;
     }
+
+    public void delete(Long id){
+        pictureRepository.deleteById(id);
+    }
+
 }

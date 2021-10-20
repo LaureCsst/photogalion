@@ -25,7 +25,6 @@ export class MemberUpdateFormComponent implements OnInit {
     pseudo:new FormControl("",Validators.required),
     birthday: "",
     mail:new FormControl("",Validators.required),
-    password:new FormControl("",Validators.required),
     color:"",
     thumbnail:"",
   }); 
@@ -77,10 +76,6 @@ export class MemberUpdateFormComponent implements OnInit {
 
     if(!this.memberFormDto.firstName){
       this.memberFormDto.firstName=this.member.firstName;
-    }
-    
-    if(!this.memberFormDto.password){
-      this.memberFormDto.password=this.member.password;
     }
     
     if(!this.memberFormDto.color){

@@ -1,13 +1,5 @@
 <div class="container pt-5">
     <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-    <div class="d-flex border-dashed py-2 pl-4 justify-content-center" *ngIf="this.isSaved" >
-      <div class="secondary-color title-big col-md-4" >
-        {{messageReturn}}
-      </div>
-      <div class="col-md-4">
-          <button class="add-btn-word" >Retour</button>
-      </div>
-    </div>
       <div class="primary-color title-big" *ngIf="!this.isSaved">
         Insérez vos photos :
       </div>
@@ -25,12 +17,12 @@
         <img src="{{image.image}}" *ngIf="image.image" class="pix-medium">
       </div>
     </div>
-      <div>
+      <div class="secondary-color title col-md-4 text-center pt-5">
         {{messageReturn}}
       </div>
       <div>
       </div>
-      <div class="d-flex justify-content-center  pt-5">
+      <div class="d-flex justify-content-center pt-5">
         <button class="add-btn-word" type="submit" [disabled]="!checkoutForm.valid" [ngClass]="!checkoutForm.valid?'disable-btn':''" >
             Ok
         </button>

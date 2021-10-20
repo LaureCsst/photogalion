@@ -7,7 +7,7 @@ import { PictureFormDto } from '../models/pictureFormDto';
   providedIn: 'root'
 })
 export class PictureService {
-  public host:string="http://localhost:8080/api/auth/photo";
+  public host:string="http://localhost:8081/api/auth/photo";
   message:string;
 
   constructor(private http:HttpClient) { }
@@ -19,5 +19,9 @@ export class PictureService {
 
 public onGetPictureByMember(id:number){
   return this.http.get(this.host+"/member/"+id);
+}
+
+public onDeletePicture(id:number){
+  return this.http.get(this.host+"/delete/" + id);
 }
 }

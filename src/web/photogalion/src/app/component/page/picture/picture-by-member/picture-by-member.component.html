@@ -1,9 +1,14 @@
 
 <div class="container">
-    <div>Mes photos</div>
+    <div class="title primary-color pt-3">Mes photos</div>
     <div class="row">
-        <div class="d-flex justify-content-center col-md-3 pt-3" *ngFor="let image of pictures">
-           <img src="{{image.image}}" *ngIf="image.image" class="pix-medium">
+        <div class=" d-flex justify-content-center col-md-3 pt-3" *ngFor="let image of pictures">
+            <div class="image-div">
+              <img src="{{image.image}}" *ngIf="image.image" class="pix-medium">
+              <div (click)="onDeleteMember(image.id)">
+                 <img class="hidden_img clickable" src="../../../assets/icons/trash.png" width="20" height="20" />
+              </div>
+           </div>
         </div>
     </div>
 </div>

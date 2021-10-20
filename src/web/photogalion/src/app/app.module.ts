@@ -21,6 +21,7 @@ import { ProfileComponent } from './component/page/member/profile/profile.compon
 import { PictureComponent } from './component/page/picture/picture/picture.component';
 import { PictureFormComponent } from './component/page/picture/picture-form/picture-form.component';
 import { PictureByMemberComponent } from './component/page/picture/picture-by-member/picture-by-member.component';
+import { StationsMapComponent } from './component/page/station/stations-map/stations-map.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PictureByMemberComponent } from './component/page/picture/picture-by-me
     ProfileComponent,
     PictureComponent,
     PictureFormComponent,
-    PictureByMemberComponent
+    PictureByMemberComponent,
+    StationsMapComponent
   ],
   imports: [
     BrowserModule, 

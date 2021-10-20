@@ -31,4 +31,10 @@ public class PictureRestController {
         public List<PictureFormDto> readPicturesFromUser(@PathVariable("id") Long id) {
         return pictureService.readPicturesFromUser(id);
     }
+
+    @GetMapping("/delete/{id}")
+    public void deletePicture(@PathVariable("id") Long id) {
+        pictureService.delete(id);
+    }
+
 }

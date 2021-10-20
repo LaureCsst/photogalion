@@ -42,6 +42,7 @@ public class MemberService {
         Member member = memberRepository.findById(id).get();
         MemberProfilDto memberProfilDto = new MemberProfilDto();
         memberProfilDto= memberProfilMapper.entityToDto(member);
+        memberProfilDto.id=member.id;
         return memberProfilDto;
     }
 
@@ -78,11 +79,10 @@ public class MemberService {
        Member memberForm=memberFormMapper.dtoToEntity(memberFormDto);
        //Add new value from Form
         System.out.println(memberForm);
+        member.setPseudo(memberForm.pseudo);
        member.setFirstName(memberForm.getFirstName());
        member.setName(memberForm.getName());
-       member.setPseudo(memberForm.getPseudo());
        member.setMail(memberForm.getMail());
-       member.setPassword(memberForm.getPassword());
        member.setBirthday(memberForm.getBirthday());
        member.setColor(memberForm.getColor());
        member.setThumbnail(memberForm.getThumbnail());
@@ -90,11 +90,11 @@ public class MemberService {
         HashMap<Boolean, String> validation = isValid(member);
         //Iterate on the map, if validation is ok persist member
         //Otherwise return the warning message
+
         for(Map.Entry<Boolean, String> entry : validation.entrySet()) {
             if(!entry.getKey()) {
                 return entry.getValue();
             }
-
         }
         memberRepository.save(member);
         return "Le membre a été ajouté";
@@ -111,10 +111,6 @@ public class MemberService {
         }
         if (member.getMail()== null){
             validation.put(false,"Veuillez entrer un email");
-            return validation;
-        }
-        if (member.getPassword()== null){
-            validation.put(false,"Veuillez entrer un mot de passe");
             return validation;
         }
         validation.put(true,"Le membre a été ajouté");

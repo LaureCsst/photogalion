@@ -6,8 +6,11 @@
             </div>
             <ul *ngIf="members" class="row" >
                 <li *ngFor="let m of members"  (click)="onGetMember(m.id)" [routerLink]="['/member-detail', m.id]" class="text-center col-md-4 clickable mt-2">
-                    <div class="col-md-2 col-xs-12">
+                    <div class="col-md-2 col-xs-12" *ngIf=m.thumbnail>
                         <img src="{{m.thumbnail}}" alt="Avatar" class="member-thumbnail">
+                    </div>
+                    <div class="col-md-2 col-xs-12" *ngIf=!m.thumbnail>
+                        <img src="../../../../../assets/member/thumbnails/thumb0.jpg" alt="Avatar" class="member-thumbnail">
                     </div>
                     <div class="secondary-color title text-center clickable"> 
                         {{m.pseudo}}
@@ -17,14 +20,14 @@
         </div>
         <div class="col-md-2 col-xs-12">
                 <div class="title primary-color py-auto text-center">
-                    Ajouter de nouveaux matelots
+                    Ajouter de nouvelles photos
                 </div>
-                <div class="ml-5 mt-5">
+                <div class="text-center pt-5">
                     <div class=" py-auto px-auto">
-                        <button class="add-btn" [routerLink]="['/member-form']">+</button>
+                        <button class="add-btn" [routerLink]="['/picture-form']">+</button>
                     </div>
                 </div>
         </div>
-
+ 
     </div>
 </div>
