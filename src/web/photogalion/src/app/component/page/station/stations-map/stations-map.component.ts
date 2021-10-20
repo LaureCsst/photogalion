@@ -46,7 +46,8 @@ export class StationsMapComponent implements OnInit {
     layers: layers,
     target: 'map',
     view: new View({
-      center: [-10997148, 4569099],
+      //Zoom sur la France
+      center: [261231, 5997553],
       zoom: 4,
     }),
   });
