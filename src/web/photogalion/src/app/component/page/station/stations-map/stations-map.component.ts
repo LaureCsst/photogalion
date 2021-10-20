@@ -58,6 +58,9 @@ export class StationsMapComponent implements OnInit {
   getCoord(event: any){
     this.coordinate = this.map.getEventCoordinate(event);
     console.log(this.coordinate);
+    // Etape 1 Créer une nouvelle station en BDD et vérifier qu'elle ressort
+    // Une fois ok: Au click ouvrir la page d'ajout de photos et lier les photos à la station
+    
  }
 
 }
