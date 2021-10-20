@@ -16,6 +16,8 @@ import TileWMS from 'ol/source/TileWMS';
 })
 export class StationsMapComponent implements OnInit {
   map:any;
+  event:Event;
+  coordinate:any;
 
   
 
@@ -26,7 +28,6 @@ export class StationsMapComponent implements OnInit {
         source: new OSM(),
       }),
        new TileLayer({
-      extent: [-13884991, 2870341, -7455066, 6338219],
       source: new TileWMS({
         url: 'http://localhost:8080/geoserver/wms',
         params: {'LAYERS': 'workspace:test', 'TILED': true},
@@ -36,7 +37,7 @@ export class StationsMapComponent implements OnInit {
       }),
     }),
   ];
-  let map = new Map({
+  this.map = new Map({
     layers: layers,
     target: 'map',
     view: new View({
@@ -47,5 +48,10 @@ export class StationsMapComponent implements OnInit {
 
 
   }
+
+  getCoord(event: any){
+    this.coordinate = this.map.getEventCoordinate(event);
+    console.log(this.coordinate);
+ }
 
 }
