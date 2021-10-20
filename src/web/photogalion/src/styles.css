@@ -139,9 +139,9 @@ src: url(assets/font/ABeeZee-Italic.ttf) format("opentype");
     border: #2c387036 dashed;
 }
 
-#hotel_map {
-    height: 400px;
+.map {
     width: 100%;
+    height:400px;
   }
   
 @media only screen and (max-width: 767px) {

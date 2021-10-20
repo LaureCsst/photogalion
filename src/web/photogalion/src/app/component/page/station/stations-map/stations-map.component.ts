@@ -28,13 +28,15 @@ export class StationsMapComponent implements OnInit {
        new TileLayer({
       extent: [-13884991, 2870341, -7455066, 6338219],
       source: new TileWMS({
-        url: 'http://localhost:8080/geoserver/workspace/wms?service=WMS&version=1.1.0&request=GetMap&layers=workspace%3Atest&bbox=-2.227963319875549%2C0.125477595420097%2C-0.922309758121722%2C47.272183893718775&width=330&height=768&srs=EPSG%3A4326&styles=&format=application/openlayers',
-        params: {'LAYERS': 'topp:states', 'TILED': true},
-        serverType: 'geoserver'
+        url: 'http://localhost:8080/geoserver/wms',
+        params: {'LAYERS': 'workspace:test', 'TILED': true},
+        serverType: 'geoserver',
+        transition:0,
+        
       }),
     }),
   ];
-  const map = new Map({
+  let map = new Map({
     layers: layers,
     target: 'map',
     view: new View({
@@ -43,18 +45,7 @@ export class StationsMapComponent implements OnInit {
     }),
   });
 
-    this.map = new Map({
-      target: 'hotel_map',
-      layers: [
-        new TileLayer({
-          source: new OSM()
-        })
-      ],
-      view: new View({
-        center: olProj.fromLonLat([7.0785, 51.4614]),
-        zoom: 5
-      })
-    });
+
   }
 
 }
