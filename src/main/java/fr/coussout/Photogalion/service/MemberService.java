@@ -30,7 +30,6 @@ public class MemberService {
 
     public List<MemberRecapDto> findAllMembers(){
         List<Member> members= memberRepository.findAll();
-        System.out.println(members);
         List<MemberRecapDto> memberRecapDtos = new ArrayList<>();
         members.forEach(member -> {
             memberRecapDtos.add(memberRecapMapper.entityToDto(member));
@@ -67,8 +66,6 @@ public class MemberService {
         }
         if(member.getThumbnail()==null){
             member.setThumbnail("thumb0");
-        } else {
-            System.out.println("Je passe là");
         }
         memberRepository.save(member);
         return "Le membre a été ajouté";

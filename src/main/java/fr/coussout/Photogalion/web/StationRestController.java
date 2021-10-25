@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/auth/station")
@@ -22,5 +23,10 @@ public class StationRestController {
     @PostMapping(value = "/add")
     public String addMember(@Valid @RequestBody StationFormDto stationFormDto, BindingResult result) throws Exception {
         return stationService.add(stationFormDto);
+    }
+
+    @GetMapping("/get")
+    public List<StationFormDto> findAll() {
+        return stationService.findAll();
     }
 }

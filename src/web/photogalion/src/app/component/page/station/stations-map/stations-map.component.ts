@@ -8,6 +8,9 @@ import OSM from 'ol/source/OSM';
 import * as olProj from 'ol/proj';
 import TileLayer from 'ol/layer/Tile';
 import TileWMS from 'ol/source/TileWMS';
+import { StationService } from 'src/app/services/station.service';
+import { StationFormDto } from 'src/app/models/stationFormDto';
+import { __await } from 'tslib';
 
 @Component({
   selector: 'app-stations-map',
@@ -18,6 +21,11 @@ export class StationsMapComponent implements OnInit {
   map:any;
   event:Event;
   coordinate:any;
+  stationFormDto:StationFormDto= new StationFormDto();
+  stationFormDtos:any=[];
+  stations:any=[];
+
+constructor( public stationService: StationService) { }
 
   
 
@@ -52,6 +60,7 @@ export class StationsMapComponent implements OnInit {
     }),
   });
 
+  this.createMap();
 
   }
 
@@ -60,7 +69,23 @@ export class StationsMapComponent implements OnInit {
     console.log(this.coordinate);
     // Etape 1 Créer une nouvelle station en BDD et vérifier qu'elle ressort
     // Une fois ok: Au click ouvrir la page d'ajout de photos et lier les photos à la station
+    stationFormDto:StationFormDto;
+    this.stationFormDto.longitude= this.coordinate[0];
+    this.stationFormDto.lattitude= this.coordinate[0];
+    this.stationService.onAddStation(this.stationFormDto);
     
+    console.log(this.stationFormDtos)
+ }
+
+ async getStations(){
+   //Récupération des datas en BDD
+   return this.stationService.onGetStations().toPromise();
+ }
+
+   //Créer un vecteur source et un layer
+   //Créer une map et y ajouter les layers
+ async createMap(){
+  this.stationFormDtos = await this.getStations();
  }
 
 }

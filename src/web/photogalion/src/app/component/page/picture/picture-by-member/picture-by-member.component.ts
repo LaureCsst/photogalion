@@ -33,7 +33,6 @@ export class PictureByMemberComponent implements OnInit {
       this.pictures=data;
       this.pictures.forEach((p:any) => {
         p.image=(this._sanitizer.bypassSecurityTrustResourceUrl(p.image) as any).changingThisBreaksApplicationSecurity;
-        console.log(p);
       });
     },err=>{
       console.log(err);
