@@ -10,6 +10,6 @@ public class PictureFormDto {
     public Date date;
     public String image;
     public long memberId;
-    public long stationId;
+    public double[] stations;
     public long eventId;
 }

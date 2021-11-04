@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Data
 public class StationFormDto {
-    public double lattitude;
+    public long id;
     public double longitude;
+    public double lattitude;
 }

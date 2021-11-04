@@ -12,6 +12,7 @@ import { BoardAdminComponent } from './component/page/member/board-admin/board-a
 import { PictureFormComponent } from './component/page/picture/picture-form/picture-form.component';
 import { PictureByMemberComponent } from './component/page/picture/picture-by-member/picture-by-member.component';
 import { StationsMapComponent } from './component/page/station/stations-map/stations-map.component';
+import { StationMapFormComponent } from './component/page/station/station-map-form/station-map-form.component';
 const routes: Routes = [
   //Member
   {
@@ -53,7 +54,10 @@ const routes: Routes = [
   {
     path:'my-station',
     component: StationsMapComponent,
-
+  },
+  {
+    path:'add-picture',
+    component: StationMapFormComponent,
   },
 ];
 

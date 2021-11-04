@@ -2,11 +2,15 @@ package fr.coussout.Photogalion.service;
 
 import fr.coussout.Photogalion.dao.MemberRepository;
 import fr.coussout.Photogalion.dao.PictureRepository;
+import fr.coussout.Photogalion.dao.StationRepository;
 import fr.coussout.Photogalion.dto.member.MemberFormDto;
 import fr.coussout.Photogalion.dto.picture.PictureFormDto;
+import fr.coussout.Photogalion.dto.station.StationFormDto;
 import fr.coussout.Photogalion.entities.Member;
 import fr.coussout.Photogalion.entities.Picture;
+import fr.coussout.Photogalion.entities.Station;
 import fr.coussout.Photogalion.mapper.picture.IPictureFormMapper;
+import fr.coussout.Photogalion.mapper.station.IStationFormMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,16 +28,28 @@ public class PictureService {
     private IPictureFormMapper pictureFormMapper;
     @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private IStationFormMapper stationFormMapper;
+    @Autowired
+    private StationRepository stationRepository;
 
     public String add(PictureFormDto[] pictureFormDto) {
+        Station station = new Station();
+        station.setLattitude(pictureFormDto[0].getStations()[0]);
+        station.setLongitude(pictureFormDto[0].getStations()[1]);
+        stationRepository.save(station);
+        Long stationId=station.getId();
         for (PictureFormDto p:pictureFormDto
              ) {
             Picture picture= new Picture();
             picture=pictureFormMapper.dtoToEntity(p);
-            //set the member of the picture;
+            //set the station of the picture
+            picture.setStation(station);
+            //set the member of the picture
             Member member=new Member();
             member=memberRepository.getById(p.memberId);
             picture.member=member;
+           // picture.station=station;
             pictureRepository.save(picture);
         }
         return "La photo a été ajoutée";
@@ -52,6 +68,27 @@ public class PictureService {
         return picturesFormDto;
     }
 
+    @Transactional
+    public List<PictureFormDto>  readPicturesFromStation(Long id){
+        List<Picture> pictures=pictureRepository.findPicturesByStation(id);
+        List<PictureFormDto> picturesFormDto = new ArrayList<PictureFormDto>();
+        for (Picture p: pictures
+        ) {
+            PictureFormDto pictureFormDto= pictureFormMapper.entityToDto(p);
+            pictureFormDto.id= p.id;
+            picturesFormDto.add(pictureFormDto);
+        };
+        return picturesFormDto;
+    }
+    @Transactional
+    public PictureFormDto  readLastPicturesFromStation(Long id){
+        Picture picture=pictureRepository.findLastPicturesByStation(id);
+
+            PictureFormDto pictureFormDto= pictureFormMapper.entityToDto(picture);
+
+
+        return pictureFormDto;
+    }
     public void delete(Long id){
         pictureRepository.deleteById(id);
     }

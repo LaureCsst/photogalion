@@ -21,7 +21,7 @@ public class StationRestController {
     private StationService stationService;
 
     @PostMapping(value = "/add")
-    public String addMember(@Valid @RequestBody StationFormDto stationFormDto, BindingResult result) throws Exception {
+    public String addStation(@Valid @RequestBody StationFormDto stationFormDto, BindingResult result) throws Exception {
         return stationService.add(stationFormDto);
     }
 

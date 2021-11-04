@@ -11,6 +11,7 @@ import { MemberDetailComponent } from './component/page/member/member-detail/mem
 import { MemberFormComponent } from './component/page/member/member-form/member-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MemberUpdateFormComponent } from './component/page/member/member-update-form/member-update-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginComponent } from './component/page/member/login/login.component';
 import { RegisterComponent } from './component/page/member/register/register.component';
@@ -22,6 +23,7 @@ import { PictureComponent } from './component/page/picture/picture/picture.compo
 import { PictureFormComponent } from './component/page/picture/picture-form/picture-form.component';
 import { PictureByMemberComponent } from './component/page/picture/picture-by-member/picture-by-member.component';
 import { StationsMapComponent } from './component/page/station/stations-map/stations-map.component';
+import { StationMapFormComponent } from './component/page/station/station-map-form/station-map-form.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { StationsMapComponent } from './component/page/station/stations-map/stat
     PictureComponent,
     PictureFormComponent,
     PictureByMemberComponent,
-    StationsMapComponent
+    StationsMapComponent,
+    StationMapFormComponent
   ],
   imports: [
     BrowserModule, 
@@ -47,7 +50,8 @@ import { StationsMapComponent } from './component/page/station/stations-map/stat
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule   
   ],
   providers: [],
   bootstrap: [AppComponent]

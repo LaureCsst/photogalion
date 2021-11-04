@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
 import { PictureFormDto } from 'src/app/models/pictureFormDto';
+import { StationFormDto } from 'src/app/models/stationFormDto';
 import { TokenStorageService } from 'src/app/services/connectionService/tokenStorage/token-storage.service';
 import { PictureService } from 'src/app/services/picture.service';
 
@@ -23,9 +25,10 @@ export class PictureFormComponent implements OnInit {
   image:any;
   event:Event;
   images:any=[];
+  station:any=[];
 
   constructor(private tokenStorage: TokenStorageService, 
-    private formBuilder: FormBuilder, public pictureService: PictureService) { }
+    private formBuilder: FormBuilder, public pictureService: PictureService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -35,6 +38,10 @@ export class PictureFormComponent implements OnInit {
       this.isLoggedIn = true;
       this.user = this.tokenStorage.getUser();
          }
+
+  // this.route.params.subscribe((params: Params) => this.station = params['station']);
+   this.station[1]=this.route.snapshot.params.longitude;
+   this.station[0]=this.route.snapshot.params.lattitude;
   }
 
   onSubmit(): String | undefined {
@@ -44,6 +51,7 @@ export class PictureFormComponent implements OnInit {
       return this.messageReturn;
     }
     try{
+      console.log(this.station);
       this.pictureFormDto={ ...this.checkoutForm.value}; 
       this.pictureService.onAddPicture(this.images);
       this.checkoutForm.reset();
@@ -85,8 +93,9 @@ readAsDataURL(file:any) {
   return new Promise((resolve, reject)=>{
     let fileReader = new FileReader();
     let user = this.tokenStorage.getUser();
+    let station= this.station;
     fileReader.onload = function(){
-      return resolve({image:fileReader.result, name:file.name, date:file.lastModifiedDate, memberId:user.id});
+      return resolve({image:fileReader.result, name:file.name, date:file.lastModifiedDate, memberId:user.id, stations:station});
     }
     fileReader.readAsDataURL(file);
   })

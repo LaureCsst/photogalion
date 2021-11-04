@@ -3,4 +3,5 @@ export class PictureFormDto {
     date:Date;
     image:string;
     memberId:number;  
+    station:[];
 }

@@ -1,0 +1,18 @@
+<div class="container">
+    <div id="map" (click)="getModal($event, modalData)" class="map">
+        <ng-template #modalData let-modal>
+            <div class="modal-header">
+              <h4 class="secondary-color title" id="modal-basic-title">Voulez vous ajouter des photos à cette position?</h4>
+            </div>
+          
+            <div class="justify-content-between d-flex py-2 px-3">
+                  <button type="button" class="add-btn-word" (click)="getAddPhoto()" (click)="modal.close('Save click')">
+                    <span>Oui</span>
+                  </button>
+                  <button type="button" class="add-btn-word primary-bg-color" (click)="modal.close('Save click')">
+                    <span>Non</span>
+                  </button>
+            </div>
+          </ng-template>
+    </div>
+</div>

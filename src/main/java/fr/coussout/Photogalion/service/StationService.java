@@ -32,7 +32,9 @@ public class StationService {
         List<Station> stations= stationRepository.findAll();
         List<StationFormDto> stationFormDtos = new ArrayList<>();
         stations.forEach(station -> {
-            stationFormDtos.add(stationFormMapper.entityToDto(station));
+            StationFormDto stationFormDto= stationFormMapper.entityToDto(station);
+            stationFormDto.id= station.getId();
+            stationFormDtos.add(stationFormDto);
         });
         return stationFormDtos;
     }
