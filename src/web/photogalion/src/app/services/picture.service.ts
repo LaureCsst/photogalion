@@ -28,6 +28,7 @@ public onGetLastPictureByStation(id:number){
 }
 
 public onGetPicturesByStation(id:number){
+  console.log("Je passe")
   return this.http.get(this.host+"/station/"+id);
 }
 
