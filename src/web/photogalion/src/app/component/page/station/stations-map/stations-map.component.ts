@@ -34,15 +34,16 @@ export class StationsMapComponent implements OnInit {
   lastPictureByStation: any;
   picturesByStation: any = [];
   feature:any;
-  isStationClicked: boolean=false;
   stationId:any;
+  isStationClicked: boolean=false;
+  isPictureClicked: boolean=false;
+  pictureById:any;
 
 
   constructor(public stationService: StationService, public pictureService: PictureService, private router: Router) { }
 
   ngOnInit(): void { 
     this.createMap()
-  
   }
 
   async getStations() {
@@ -57,6 +58,7 @@ export class StationsMapComponent implements OnInit {
   async getLastPictureByStation(id: number) {
     return this.pictureService.onGetLastPictureByStation(id).toPromise();
   }
+
   async callPicturesByStation(stationId:number){
     if(this.isStationClicked){
       this.picturesByStation = await this.getPicturesByStation(stationId);
@@ -64,6 +66,21 @@ export class StationsMapComponent implements OnInit {
     }    
   }
 
+  onGetImageById(id:number){
+    if(!this.picturesByStation) return;
+    this.pictureById=null;
+    this.picturesByStation.forEach((picture:any) => {
+    if(picture.id == id){
+        this.pictureById=picture;
+      }
+    });
+    this.isPictureClicked=true;
+  }
+
+  onReturnToStation(){
+    this.createMap();
+    this.isPictureClicked=false;
+  }
 
   //Créer un vecteur source et un layer
   //Créer une map et y ajouter les layers
@@ -127,10 +144,6 @@ export class StationsMapComponent implements OnInit {
     });
     map.addOverlay(popup);
 
-    // this.picturesByStation = this.getPicturesByStation(1);
-    // for (let picture of this.picturesByStation){
-    // console.log("Lala"+picture);
-    // }
 
     this.stationId= map.on("click", (evt)=>{
       map.forEachFeatureAtPixel(evt.pixel, (feature)=> {
