@@ -1,11 +1,17 @@
 
 <div class="container">
-    <div id="map2"  class="map">
+    <div class="title-big my-5 primary-color">Stations</div>
+    <div class="title mt-5 secondary-color"> Cliquez sur une icône photo pour afficher les photos</div>
+    <div id="map2"  class="map mt-5">
     </div>
     <div *ngIf="isStationClicked">
-        <div>
-            <img src="{{picturesByStation.image}}" class="pix-medium">
+        <div class="title-big mt-5 primary-color">
+            Photos
         </div>
-
+        <div *ngIf="isStationClicked" class="row">
+            <div class="d-flex justify-content-center col-md-3 pt-3" *ngFor="let picture of picturesByStation">
+                <img src="{{picture.image}}" class="pix-medium">
+            </div>
+        </div>
     </div>
 </div>

@@ -50,12 +50,18 @@ export class StationsMapComponent implements OnInit {
     return this.stationService.onGetStations().toPromise();
   }
 
-  getPicturesByStation(id: number) {
+  async getPicturesByStation(id: number) {
     //Récupération des datas en BDD
-    return this.pictureService.onGetPicturesByStation(id);
+    return this.pictureService.onGetPicturesByStation(id).toPromise();
   }
   async getLastPictureByStation(id: number) {
     return this.pictureService.onGetLastPictureByStation(id).toPromise();
+  }
+  async callPicturesByStation(stationId:number){
+    if(this.isStationClicked){
+      this.picturesByStation = await this.getPicturesByStation(stationId);
+      console.log("Je passssse"+ this.picturesByStation);
+    }    
   }
 
 
@@ -134,12 +140,10 @@ export class StationsMapComponent implements OnInit {
         console.log(this.feature.get('name'));
         //this.picturesByStation = this.getPicturesByStation(this.feature.get('name'));
         this.isStationClicked=true;
+        this.callPicturesByStation(this.feature.get('name'));
       }
     });
-if(this.stationId){
-  this.picturesByStation = this.getPicturesByStation(this.feature.get('name'));
-  console.log("Je passssse");
-}
+ 
   
 
     // change mouse cursor when over marker
