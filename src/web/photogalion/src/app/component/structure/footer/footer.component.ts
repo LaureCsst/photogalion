@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/connectionService/tokenStorage/token-storage.service';
-import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class FooterComponent implements OnInit {
   isLoggedIn:boolean=false;
-  constructor(public tokenStorage: TokenStorageService, private router: Router) { }
-  isToggleOpen:boolean=false;
+  constructor(public tokenStorage: TokenStorageService, private router: Router ) {}
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorage.getToken();
@@ -24,9 +24,5 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']).then(() => {
       window.location.reload();
     });
-  }
-  changeToggle(){
-    this.isToggleOpen=!this.isToggleOpen;
-
   }
 }

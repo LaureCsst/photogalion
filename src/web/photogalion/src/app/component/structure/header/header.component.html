@@ -1,23 +1,55 @@
-<nav class="navbar navbar-expand-lg title secondary-bg-color px-5 py-3 ">
-    <div class="primary-color " href="#">Photogalion</div>
-    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> 
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav my-auto">
-        <div class="nav-item px-5 white-color clickable" *ngIf="isLoggedIn" routerLink="/member"> Marins </div>
+<nav class=" navbar navbar-expand-lg justify-content-between title secondary-bg-color px-5 py-3 header-menu-md">
+  <div class="d-flex">  
+  <div class="primary-color px-5" href="#">Photogalion</div>
+    <div class="d-flex" *ngIf="isLoggedIn">
+      <div class="nav-item dropdown">
+        <div class="px-5 dropdown-toggle white-color clickable" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" >
+          Photos
+        </div>
+        <div class="dropdown-menu white-color clickable " aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/add-picture">Ajouter</a>
+          <a class="dropdown-item" routerLink="/my-picture">Mes photos</a>
+          <a class="dropdown-item" routerLink="/my-station">Toutes les photos</a>
+        </div>
       </div>
       <div class="navbar-nav my-auto">
-        <div class="nav-item px-5 white-color clickable" *ngIf="isLoggedIn" routerLink="/my-picture"> Mes photos </div>
+        <div class="nav-item px-5 white-color clickable"  routerLink="/member"> Marins </div>
       </div>
     </div>
-    <div class="d-flex justified-content-end" *ngIf="isLoggedIn">
+  </div>
+    <div class="d-flex justify-content-end" *ngIf="isLoggedIn">
       <div class="nav-item px-5 white-color clickable" (click)="onSignOut()"> Déconnexion </div>
     </div>
-    <div class="d-flex justified-content-end" *ngIf="!isLoggedIn">
-      <div class="nav-item px-5 white-color clickable" routerLink="/register"> S'inscrire </div>
-    </div>
-    <div class="d-flex justified-content-end" *ngIf="!isLoggedIn">
-      <div class="nav-item px-5 white-color clickable" routerLink="/login"> Connexion </div>
+    <div *ngIf="!isLoggedIn" class="d-flex justify-content-end" >
+      
+        <div class="nav-item px-5 white-color clickable" routerLink="/register"> S'inscrire </div>
+        <div class="nav-item px-5 white-color clickable" routerLink="/login"> Connexion </div>
+      
     </div>
   </nav>
+
+
+  <section class="mb-3 secondary-bg-color header-menu-xs">
+    <nav class="py-3 px-3">
+      <div (click)="changeToggle()">
+        <div class="navbar-toggler first-button">
+          <div class="animated-icon1"><span></span><span></span><span></span></div>
+      </div>
+      </div>
+    </nav>
+    <div *ngIf="isToggleOpen">
+      <div class="p-4 px-5 row d-flex">
+        <div *ngIf="isLoggedIn">
+          <div class="m-0 justify-content-start white-color title pt-3 " (click)="changeToggle()" routerLink="/add-picture">Ajouter des photos</div>
+          <div class="m-0 justify-content-start white-color title pt-3" (click)="changeToggle()" routerLink="/my-picture">Mes photos</div>
+          <div class="m-0 justify-content-start white-color title pt-3" (click)="changeToggle()" routerLink="/my-station">Toutes les photos</div>
+          <div class="m-0 justify-content-start white-color title pt-3" (click)="changeToggle()" routerLink="/member">Les marins</div>
+          <div class="m-0 justify-content-start white-color title pt-5" (click)="onSignOut()" (click)="changeToggle()" >Déconnexion</div>
+        </div>
+        <div *ngIf="!isLoggedIn">
+          <div class="m-0 justify-content-start white-color title pt-3" (click)="changeToggle()" routerLink="/login">Connexion</div>
+          <div class="m-0 justify-content-start white-color title pt-3" (click)="changeToggle()" routerLink="/register">S'inscrire</div>
+        </div>
+      </div>
+    </div>
+  </section>

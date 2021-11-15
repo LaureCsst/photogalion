@@ -1,0 +1,17 @@
+<div class="mt-5" *ngIf="isLoggedIn">
+    <div class="secondary-bg-color py-5">
+        <div class="container">
+            <div class="row d-flex justify-content-arround white-color px-5 title">
+                <div class="col-md-6">
+                    <div class="py-3 clickable" routerLink="/add-picture">Ajouter des photos</div>
+                    <div class="py-3 clickable" routerLink="/my-picture">Mes photos</div>
+                    <div class="py-3 clickable" routerLink="/my-station">Voir les photos</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="py-3 clickable" routerLink="/member">Les marins</div>
+                    <div class="py-3 clickable" (click)="onSignOut()"> Deconnexion</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -24,6 +24,7 @@ import { PictureFormComponent } from './component/page/picture/picture-form/pict
 import { PictureByMemberComponent } from './component/page/picture/picture-by-member/picture-by-member.component';
 import { StationsMapComponent } from './component/page/station/stations-map/stations-map.component';
 import { StationMapFormComponent } from './component/page/station/station-map-form/station-map-form.component';
+import { FooterComponent } from './component/structure/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { StationMapFormComponent } from './component/page/station/station-map-fo
     PictureFormComponent,
     PictureByMemberComponent,
     StationsMapComponent,
-    StationMapFormComponent
+    StationMapFormComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule, 
