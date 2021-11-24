@@ -25,7 +25,6 @@ export class RegisterComponent implements OnInit {
     this.form.thumbnail=this.imagePath;
     this.authService.register(this.form).subscribe(
       data => {
-        console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },

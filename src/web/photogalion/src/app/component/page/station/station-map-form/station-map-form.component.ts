@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { ModalDismissReasons,NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Map, View } from 'ol';
 import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
+import Stamen from 'ol/source/Stamen';
 import TileWMS from 'ol/source/TileWMS';
 import { StationFormDto } from 'src/app/models/stationFormDto';
+import { TokenStorageService } from 'src/app/services/connectionService/tokenStorage/token-storage.service';
 
 @Component({
   selector: 'app-station-map-form',
@@ -18,17 +19,24 @@ export class StationMapFormComponent implements OnInit {
   closeModal:string;
   coordinate:any;
   stationFormDto:StationFormDto= new StationFormDto();
-  constructor(private modalService: NgbModal, private router: Router ) { }
+  constructor(private modalService: NgbModal, private router: Router, private token: TokenStorageService ) { }
 
   ngOnInit(): void {
+    this.isUserLogged(this.token);
     this.createMap();
-
   }
 
   createMap(){
     const layers = [
       new TileLayer({
-        source: new OSM(),
+        source: new Stamen({
+          layer:'watercolor',
+        }),
+      }),
+      new TileLayer({
+        source: new Stamen({
+          layer: 'terrain-labels',
+        }),
       }),
        new TileLayer({
       /* Extent donne l'emprise géographique dans laquelle récuperer les données.
@@ -66,7 +74,6 @@ export class StationMapFormComponent implements OnInit {
  }
   
   getModal(event: any, content:any){
-    console.log(event);
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((res) => {
       this.closeModal = `Closed with: ${res}`;
     }, (res) => {
@@ -87,6 +94,11 @@ export class StationMapFormComponent implements OnInit {
  }
 }
 
+public isUserLogged(tokenStorage:any){
+  if (!tokenStorage.getToken()) {
+    this.router.navigate(['/login'])
+  }
+}
 
 
 }

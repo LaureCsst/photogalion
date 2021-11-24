@@ -22,6 +22,7 @@ export class MemberDetailComponent implements OnInit {
     private router: Router, private _sanitizer: DomSanitizer, private token: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.isUserLogged(this.token);
     this.currentUser = this.token.getUser();
     this.getMember(this.activatedRoute.snapshot.params.id);
   }
@@ -40,7 +41,6 @@ export class MemberDetailComponent implements OnInit {
   }
 
   public onDeleteMember(id:any){
-    
     this.memberService.onDeleteMember(id).
     subscribe(data=>{
       this.member=data;
@@ -48,10 +48,12 @@ export class MemberDetailComponent implements OnInit {
     },err=>{
       console.log(err);
     })
-    
   }
 
-
-
+  public isUserLogged(tokenStorage:any){
+    if (!tokenStorage.getToken()) {
+      this.router.navigate(['/login'])
+    }
+  }
 
 }

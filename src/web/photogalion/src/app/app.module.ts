@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +25,9 @@ import { PictureByMemberComponent } from './component/page/picture/picture-by-me
 import { StationsMapComponent } from './component/page/station/stations-map/stations-map.component';
 import { StationMapFormComponent } from './component/page/station/station-map-form/station-map-form.component';
 import { FooterComponent } from './component/structure/footer/footer.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -55,7 +58,7 @@ import { FooterComponent } from './component/structure/footer/footer.component';
     AppRoutingModule,
     NgbModule   
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: "fr-FR" }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,11 @@
 <div class="container">
-    <div id="map" (click)="getModal($event, modalData)" class="map">
+  <div class="primary-color title-big pt-5">
+    Station
+  </div>
+  <div class="secondary-color title py-3">
+    Double-cliquez à l'endroit où vous avez pris votre photo
+  </div>
+    <div id="map" (dblclick)="getModal($event, modalData)" class="map">
         <ng-template #modalData let-modal>
             <div class="modal-header">
               <h4 class="secondary-color title" id="modal-basic-title">Voulez vous ajouter des photos à cette position?</h4>

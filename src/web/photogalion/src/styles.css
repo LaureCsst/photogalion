@@ -110,6 +110,13 @@ src: url(assets/font/ABeeZee-Italic.ttf) format("opentype");
     width: 40rem;
     object-fit: contain; 
 }
+@media (min-width: 425px) {
+    .pix-big {
+        height: 20rem;
+        width: 20rem;
+        object-fit: contain; 
+    }
+}
 .img-map{
     height: 2rem;
     width: 2rem;
@@ -180,6 +187,8 @@ src: url(assets/font/ABeeZee-Italic.ttf) format("opentype");
         display: block !important;
     }
  }
+
+
  .header-menu-xs {
     display: none;
 }

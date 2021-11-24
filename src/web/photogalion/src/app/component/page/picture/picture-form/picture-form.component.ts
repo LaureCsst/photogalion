@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PictureFormDto } from 'src/app/models/pictureFormDto';
 import { StationFormDto } from 'src/app/models/stationFormDto';
 import { TokenStorageService } from 'src/app/services/connectionService/tokenStorage/token-storage.service';
@@ -28,10 +28,10 @@ export class PictureFormComponent implements OnInit {
   station:any=[];
 
   constructor(private tokenStorage: TokenStorageService, 
-    private formBuilder: FormBuilder, public pictureService: PictureService, private route: ActivatedRoute) { }
+    private formBuilder: FormBuilder, public pictureService: PictureService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-
+    this.isUserLogged(this.tokenStorage);
     this.isLoggedIn = !!this.tokenStorage.getToken();
 
     if (this.isLoggedIn) {
@@ -51,19 +51,16 @@ export class PictureFormComponent implements OnInit {
       return this.messageReturn;
     }
     try{
-      console.log(this.station);
       this.pictureFormDto={ ...this.checkoutForm.value}; 
       this.pictureService.onAddPicture(this.images);
       this.checkoutForm.reset();
       this.messageReturn=" Vos photos ont bien été enregistrées";
       this.isSaved=true;
+      this.router.navigate(['/my-station']);
       return this.messageReturn;
     }catch(error){
       return this.messageReturn;
     }
-    
-
-    
   }
 
 //Load images and set them in an array
@@ -100,4 +97,10 @@ readAsDataURL(file:any) {
     fileReader.readAsDataURL(file);
   })
 } 
+
+public isUserLogged(tokenStorage:any){
+  if (!tokenStorage.getToken()) {
+    this.router.navigate(['/login'])
+  }
+}
 }

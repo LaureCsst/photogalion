@@ -2,6 +2,7 @@ import { MemberService } from "../../../../services/member.service";
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TokenStorageService } from '../../../../services/connectionService/tokenStorage/token-storage.service';
+import { Router } from "@angular/router";
 
 
 
@@ -26,18 +27,12 @@ export class MemberComponent implements OnInit {
 
 
 
-  constructor(public memberService:MemberService, private _sanitizer: DomSanitizer, private tokenStorage:TokenStorageService ) { }
+  constructor(public memberService:MemberService, private _sanitizer: DomSanitizer, private tokenStorage:TokenStorageService,private router: Router ) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorage.getToken();
-    
-    if (this.isLoggedIn) {
-      this.isLoggedIn = true;
-      this.user = this.tokenStorage.getUser();
-      this.getMembers();
-         }
-         
-    
+    this.isUserLogged(this.tokenStorage);
+   // this.isLoggedIn = !!this.tokenStorage.getToken();
+    this.getMembers();
   }
 
   
@@ -69,6 +64,14 @@ export class MemberComponent implements OnInit {
     this.message=this.memberService.onAddMember(this.member)
   }
 
+  public isUserLogged(tokenStorage:any){
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+
+    }else{
+      this.router.navigate(['/login'])
+    }
+  }
   reloadPage(): void {
     window.location.reload();
   }

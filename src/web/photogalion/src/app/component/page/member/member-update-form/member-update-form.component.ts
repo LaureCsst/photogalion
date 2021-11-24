@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MemberFormDto } from 'src/app/models/member';
 import { MemberService } from 'src/app/services/member.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TokenStorageService } from 'src/app/services/connectionService/tokenStorage/token-storage.service';
 
 @Component({
   selector: 'app-member-update-form',
@@ -18,6 +19,7 @@ export class MemberUpdateFormComponent implements OnInit {
   thumbnail:any;
   imagePath: any;
   event: Event;
+  user:any;
 
   checkoutForm = this.formBuilder.group({
     name: "",
@@ -30,10 +32,11 @@ export class MemberUpdateFormComponent implements OnInit {
   }); 
 
 
-  constructor( private router: Router, public memberService: MemberService,private formBuilder: FormBuilder,private activatedRoute: ActivatedRoute, private _sanitizer: DomSanitizer) { }
+  constructor( private router: Router, public memberService: MemberService,private formBuilder: FormBuilder,private activatedRoute: ActivatedRoute,private token: TokenStorageService, private _sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-  this.getMember(this.activatedRoute.snapshot.params.id) 
+  this.isUserLogged(this.token);
+  this.getMember(this.token.getUser().id) 
   }
 
   public getMember(id:any){
@@ -87,20 +90,13 @@ export class MemberUpdateFormComponent implements OnInit {
     }
 
     if(!this.memberFormDto.thumbnail){
-      console.log("Je passe ici");
       this.memberFormDto.thumbnail=this.member.thumbnail;
     }else{
-      console.log("Je passe Là memberForm : ");
-      console.log(this.memberFormDto.thumbnail);
-      
-      console.log("Je passe Là thumbnail : ");
-      console.log(this.thumbnail);
       this.memberFormDto.thumbnail=this.thumbnail;
     };
 
 
     this.memberService.onUpdateMember(this.memberFormDto, this.activatedRoute.snapshot.params.id);
-    console.warn('Votre marin a été modifié', this.memberFormDto);
     this.checkoutForm.reset(); 
     this.messageReturn="Votre marin a bien été modifié"
     this.isSaved=true;
@@ -135,7 +131,12 @@ export class MemberUpdateFormComponent implements OnInit {
       this.thumbnail = reader.result;
     }
   }
+}
 
+public isUserLogged(tokenStorage:any){
+  if (!tokenStorage.getToken()) {
+    this.router.navigate(['/login'])
+  }
 }
 
 }

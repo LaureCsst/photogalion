@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/connectionService/tokenStorage/token-storage.service';
 import { PictureService } from 'src/app/services/picture.service';
 
@@ -14,9 +15,10 @@ export class PictureByMemberComponent implements OnInit {
   user:any;
   pictures:any;
   picture:any;
-  constructor(public pictureService:PictureService,  private _sanitizer: DomSanitizer,private tokenStorage:TokenStorageService) { }
+  constructor(public pictureService:PictureService, private router: Router, private _sanitizer: DomSanitizer,private tokenStorage:TokenStorageService) { }
 
   ngOnInit(): void {
+    this.isUserLogged(this.tokenStorage);
     this.isLoggedIn = !!this.tokenStorage.getToken();
     
     if (this.isLoggedIn) {
@@ -50,7 +52,11 @@ export class PictureByMemberComponent implements OnInit {
       console.log(err);
     })  
   }
-
   
+  public isUserLogged(tokenStorage:any){
+    if (!tokenStorage.getToken()) {
+      this.router.navigate(['/login'])
+    }
+  }
 
 }

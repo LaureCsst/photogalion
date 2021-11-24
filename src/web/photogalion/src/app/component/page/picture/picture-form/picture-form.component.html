@@ -13,15 +13,10 @@
         <input id="image" type="file" multiple formControlName="image" class="col-md-4 " accept="image/png, image/jpeg" (change)="onSelectFile($event)" >
       </div>
       <div class="row">
-      <div class="d-flex justify-content-center col-md-3 pt-3" *ngFor="let image of images">
+      <div class="d-flex justify-content-center col-lg-3 col-12 col-sm-6 pt-3" *ngFor="let image of images">
         <img src="{{image.image}}" *ngIf="image.image" class="pix-medium">
       </div>
     </div>
-      <div class="secondary-color title col-md-4 text-center pt-5">
-        {{messageReturn}}
-      </div>
-      <div>
-      </div>
       <div class="d-flex justify-content-center pt-5">
         <button class="add-btn-word" type="submit" [disabled]="!checkoutForm.valid" [ngClass]="!checkoutForm.valid?'disable-btn':''" >
             Ok

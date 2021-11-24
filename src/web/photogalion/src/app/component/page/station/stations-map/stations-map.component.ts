@@ -5,7 +5,7 @@ import VectorLayer from 'ol/layer/Vector';
 import OSM from 'ol/source/OSM';
 import * as olProj from 'ol/proj';
 import TileLayer from 'ol/layer/Tile';
-import TileWMS from 'ol/source/TileWMS';
+import Stamen from 'ol/source/Stamen';
 import { StationService } from 'src/app/services/station.service';
 import { StationFormDto } from 'src/app/models/stationFormDto';
 import { __await } from 'tslib';
@@ -17,6 +17,7 @@ import { PictureService } from 'src/app/services/picture.service';
 import { Feature, Overlay } from 'ol';
 import Point from 'ol/geom/Point';
 import { Icon, Style } from 'ol/style';
+import { TokenStorageService } from 'src/app/services/connectionService/tokenStorage/token-storage.service';
 
 
 @Component({
@@ -40,9 +41,10 @@ export class StationsMapComponent implements OnInit {
   pictureById:any;
 
 
-  constructor(public stationService: StationService, public pictureService: PictureService, private router: Router) { }
+  constructor(public stationService: StationService, public pictureService: PictureService, private router: Router, private token: TokenStorageService) { }
 
   ngOnInit(): void { 
+    this.isUserLogged(this.token);
     this.createMap()
   }
 
@@ -62,7 +64,6 @@ export class StationsMapComponent implements OnInit {
   async callPicturesByStation(stationId:number){
     if(this.isStationClicked){
       this.picturesByStation = await this.getPicturesByStation(stationId);
-      console.log("Je passssse"+ this.picturesByStation);
     }    
   }
 
@@ -86,11 +87,8 @@ export class StationsMapComponent implements OnInit {
   //Créer une map et y ajouter les layers
   async createMap() {
     this.stationFormDtos = await this.getStations();
-    console.log(this.stationFormDtos);
     //S'il n'y a pas de stations en BDD
     if (this.stationFormDtos.length == 0) return;
-
-    console.log(this.stationFormDtos);
     const features = [];
 
     for (let station of this.stationFormDtos) {
@@ -123,7 +121,14 @@ export class StationsMapComponent implements OnInit {
       target: 'map2',
       layers: [
         new TileLayer({
-          source: new OSM(),
+          source: new Stamen({
+            layer:'watercolor',
+          }),
+        }),
+        new TileLayer({
+          source: new Stamen({
+            layer: 'terrain-labels',
+          }),
         }),
         vectorLayer,
       ],
@@ -150,7 +155,6 @@ export class StationsMapComponent implements OnInit {
         this.feature=feature;
       });
       if(this.feature){
-        console.log(this.feature.get('name'));
         //this.picturesByStation = this.getPicturesByStation(this.feature.get('name'));
         this.isStationClicked=true;
         this.callPicturesByStation(this.feature.get('name'));
@@ -172,6 +176,11 @@ export class StationsMapComponent implements OnInit {
     });
 
 
+  }
+  public isUserLogged(tokenStorage:any){
+    if (!tokenStorage.getToken()) {
+      this.router.navigate(['/login'])
+    }
   }
 }
 

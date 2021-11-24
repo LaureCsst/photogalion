@@ -1,6 +1,9 @@
 <div class="container pt-5">
+  <div class="title-big primary-color">
+    Inscription
+   </div>
   <div class="col-md-12">
-    <div>
+    <div class="pt-5 pl-2">
       <form
         *ngIf="!isSuccessful"
         name="form"
@@ -9,11 +12,11 @@
         novalidate
         enctype="multipart/form-data"
       >
-        <div class="form-group row  my-4 input-cust">
-          <label for="username" class="col-md-2 title primary-color py-2">Pseudo *</label>
+        <div class="form-group row ml-0 my-4 input-cust">
+          <label for="username" class="pl-2 col-lg-2 col-sm-4 col-10 title primary-color py-2">Pseudo *</label>
           <input
             type="text"
-            class="col-md-4"
+            class="mx-2 col-lg-4 col-sm-6 col-10"
             name="username"
             [(ngModel)]="form.username"
             required
@@ -26,16 +29,16 @@
             <div *ngIf="username.errors.minlength" class="d-flex justify-content-end col-md-6">
               Le pseudo doit contenir minimum 3 caractères
             </div>
-            <div *ngIf="username.errors.maxlength" class="d-flex justify-content-end col-md-6">
+            <div *ngIf="username.errors.maxlength" class="d-flex justify-content-end col-10">
               Le pseudo doit contenir maximum 20 caractères
             </div>
           </div>
         </div>
         <div class="form-group  row  my-4 input-cust">
-          <label for="email" class="col-md-2 title primary-color py-2">Email *</label>
+          <label for="email" class="col-lg-2 col-sm-4 col-10 title primary-color py-2">Email *</label>
           <input
             type="email"
-            class="col-md-4"
+            class="mx-2 col-lg-4 col-sm-6 col-10"
             name="email"
             [(ngModel)]="form.email"
             required
@@ -43,75 +46,75 @@
             #email="ngModel"
           />
           <div class="secondary-color title row" *ngIf="f.submitted && email.invalid">
-            <div *ngIf="email.errors.required" class="d-flex justify-content-end col-md-6">L'email est obligatoire</div>
-            <div *ngIf="email.errors.email" class="d-flex justify-content-end col-md-6">
+            <div *ngIf="email.errors.required" class="d-flex justify-content-end col-10">L'email est obligatoire</div>
+            <div *ngIf="email.errors.email" class="d-flex justify-content-end col-10">
               Ceci n'est pas une adresse mail
             </div>
           </div>
         </div>
         <div class="form-group row my-4 input-cust">
-          <label for="password" class="col-md-2 title primary-color py-2">Mot de passe *</label>
+          <label for="password" class="col-lg-2 col-sm-4 col-10 title primary-color py-2">Mot de passe *</label>
           <input
             type="password"
             name="password"
-            class="col-md-4"
+            class="mx-2 col-lg-4 col-sm-6 col-10"
             [(ngModel)]="form.password"
             required
             minlength="6"
             #password="ngModel"
           />
           <div class="secondary-color title row" *ngIf="f.submitted && password.invalid">
-            <div *ngIf="password.errors.required" class="d-flex justify-content-end col-md-6">Le mot de passe est obligatoire</div>
-            <div *ngIf="password.errors.minlength" class="d-flex justify-content-end col-md-6">
+            <div *ngIf="password.errors.required" class="d-flex justify-content-end col-10">Le mot de passe est obligatoire</div>
+            <div *ngIf="password.errors.minlength" class="d-flex justify-content-end col-10">
               Le mot de passe doit contenir au moins 6 caractères
             </div>
           </div>
         </div>
         <div class="form-group row my-4 input-cust">
-          <label for="name" class="col-md-2 title primary-color py-2">Nom</label>
+          <label for="name" class="col-lg-2 col-sm-4 col-10 title primary-color py-2">Nom</label>
           <input
             type="text"
-            class="col-md-4"
+            class="mx-2 col-lg-4 col-sm-6 col-10"
             name="name"
             [(ngModel)]="form.name"
             #name="ngModel"
           />
         </div>
         <div class="form-group row my-4 input-cust">
-          <label for="firstName" class="col-md-2 title primary-color py-2">Prénom</label>
+          <label for="firstName" class="col-lg-2 col-sm-4 col-10 title primary-color py-2">Prénom</label>
           <input
             type="text"
-            class="col-md-4"
+            class="mx-2 col-lg-4 col-sm-6 col-10"
             name="firstName"
             [(ngModel)]="form.firstName"
             #firstname="ngModel"
           />
         </div>
         <div class="form-group row my-4 input-cust">
-          <label for="birthday" class="col-md-2 title primary-color py-2">Anniversaire</label>
+          <label for="birthday" class="col-lg-2 col-sm-4 col-10 title primary-color py-2">Anniversaire</label>
           <input
             type="date"
             name="birthday"
-            class="col-md-4"
+            class="mx-2 col-lg-4 col-sm-6 col-10"
             [(ngModel)]="form.birthday"
             #birthday="ngModel"
           />
         </div>
         <div class="form-group row my-4 input-cust">
-          <label for="color" class="col-md-2 title primary-color py-2">Couleur</label>
+          <label for="color" class="col-lg-2 col-sm-4 col-10 title primary-color py-2">Couleur</label>
           <input
             type="text"
             name="color"
-            class="col-md-4"
+            class="mx-2 col-lg-4 col-sm-6 col-10"
             [(ngModel)]="form.color"
             #name="ngModel"
           />
         </div>
         <div class="form-group row my-4 input-cust">
-          <label for="thumbnail" class="col-md-2 title primary-color py-2">Miniature</label>
+          <label for="thumbnail" class="col-lg-2 col-sm-4 col-10 title primary-color py-2">Miniature</label>
           <input
             type="file"
-            class="col-md-4"
+            class="col-lg-4 col-sm-6 col-10"
             name="thumbnail"
             [(ngModel)]="form.thumbnail"
             #thumbnail="ngModel"
@@ -124,20 +127,20 @@
             <img [src]="imagePath"  class="member-thumbnail">
           </div>
         </div>
-        <div class="d-flex justify-content-end col-md-6 mt-5">
+        <div class="d-flex justify-content-end col-10 mt-5">
           <button class="add-btn-word">Enregistrer</button>
         </div>
 
-        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        <div class="alert alert-warning col-10" *ngIf="f.submitted && isSignUpFailed">
           L'enregistrement a échoué<br />{{ errorMessage }}
         </div>
       </form>
 
-      <div class="border-dashed title d-flex col-md-6 justified-content-center secondary-color text-center py-2" *ngIf="isSuccessful">
-        <div class="col-md-8 py-2">
+      <div class="title d-flex row col-12 justify-content-center secondary-color text-center py-2" *ngIf="isSuccessful">
+        <div class="col-sm-6 col-10 py-2">
           Votre marin a bien été enregistré
         </div>
-        <div class="col-md-4 py-2">
+        <div class="col-sm-4 col-10 py-2">
           <button class="add-btn-word" (click)="getLoginPage()">Se connecter</button>
         </div>
        

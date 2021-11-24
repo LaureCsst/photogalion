@@ -10,7 +10,7 @@
                 Photos
             </div>
             <div *ngIf="isStationClicked" class="row">
-                <div class="d-flex justify-content-center col-md-3 pt-3" *ngFor="let picture of picturesByStation">
+                <div class="d-flex justify-content-center col-md-6 col-lg-3 col-12 pt-3" *ngFor="let picture of picturesByStation">
                     <img src="{{picture.image}}" class="pix-medium clickable" (click)="onGetImageById(picture.id)">
                 </div>
             </div>

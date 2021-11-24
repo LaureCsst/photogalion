@@ -1,33 +1,22 @@
 <div class="container">
     <div class="row pt-5">
-        <div class="col-md-10">
-            <div class="title primary-color">
+        <div class="col-lg-10 col-12 d-lg-flex justify-content-lg-center">
+            <div class="title-big primary-color">
                 Marins
             </div>
-            <ul *ngIf="members" class="row" >
-                <li *ngFor="let m of members"  (click)="onGetMember(m.id)" [routerLink]="['/member-detail', m.id]" class="text-center col-md-4 clickable mt-2">
-                    <div class="col-md-2 col-xs-12" *ngIf=m.thumbnail>
+            <ul *ngIf="members" class="row pt-5" >
+                <li *ngFor="let m of members"  (click)="onGetMember(m.id)" [routerLink]="['/member-detail', m.id]" class="text-center col-lg-4 col-sm-6 col-12 clickable mt-4">
+                    <div class="" *ngIf=m.thumbnail>
                         <img src="{{m.thumbnail}}" alt="Avatar" class="member-thumbnail">
                     </div>
-                    <div class="col-md-2 col-xs-12" *ngIf=!m.thumbnail>
+                    <div class="" *ngIf=!m.thumbnail>
                         <img src="../../../../../assets/member/thumbnails/thumb0.jpg" alt="Avatar" class="member-thumbnail">
                     </div>
-                    <div class="secondary-color title text-center clickable"> 
+                    <div class="secondary-color title text-center clickable pt-3"> 
                         {{m.pseudo}}
                     </div>
                 </li>
             </ul>
         </div>
-        <div class="col-md-2 col-xs-12">
-                <div class="title primary-color py-auto text-center">
-                    Ajouter de nouvelles photos
-                </div>
-                <div class="text-center pt-5">
-                    <div class=" py-auto px-auto">
-                        <button class="add-btn" [routerLink]="['/picture-form']">+</button>
-                    </div>
-                </div>
-        </div>
- 
     </div>
 </div>

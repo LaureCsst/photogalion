@@ -2,7 +2,7 @@
 <div class="container">
     <div class="title primary-color pt-3">Mes photos</div>
     <div class="row">
-        <div class=" d-flex justify-content-center col-md-3 pt-3" *ngFor="let image of pictures">
+        <div class=" d-flex justify-content-center col-lg-3 col-sm-6 col-12 pt-3" *ngFor="let image of pictures">
             <div class="image-div">
               <img src="{{image.image}}" *ngIf="image.image" class="pix-medium">
               <div (click)="onDeleteMember(image.id)">

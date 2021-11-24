@@ -1,41 +1,44 @@
 <div class="container">
-    <h1 class="display-4 text primary-color text-center  py-5">Votre marin</h1>
-    <div class="row pt-5 d-flex justify-content-center mb-5 px-auto">
-        <div class="col-md-2 col-xs-12 mx-auto d-block">
+    <div class="text primary-color title-big py-5">Votre marin</div>
+    <div class="row d-flex justify-content-lg-center justify-content-sm-between mb-5 px-auto col-12 col-lg-10">
+        <div *ngIf='imageUrl' class="col-lg-2 col-sm-4 col-10 mx-auto d-block">
             <img src="{{imageUrl}}" alt="Avatar" class="big-member-thumbnail">
         </div>
-        <div *ngIf='member' class="col-md-4 title-big secondary-color">
-            <div *ngIf='member.pseudo' class="row pb-4">
-                <div class="col-md-4">Pseudo</div>
-                <div class="col-md-6">{{ member.pseudo }}</div>
+        <div *ngIf='!imageUrl' class="col-lg-2 col-sm-4 col-10 mx-auto d-block">
+            <img src="../../../../../assets/member/thumbnails/thumb0.jpg" alt="Avatar" class="big-member-thumbnail">
+        </div>
+        <div *ngIf='member' class="px-auto col-lg-6 col-sm-8 col-10 title-big secondary-color pt-3">
+            <div *ngIf='member.pseudo' class="row pb-4 d-flex justify-content-center">
+                <div class="col-lg-4 col-sm-4 col-10 text-end">Pseudo</div>
+                <div class="col-sm-8 col-10">{{ member.pseudo }}</div>
             </div>
-            <div *ngIf='member.name' class="row pb-4">
-                <div class="col-md-4">nom</div>
-                <div class="col-md-6">{{ member.name }}</div>
+            <div *ngIf='member.name' class="row pb-4 d-flex justify-content-center">
+                <div class="col-lg-4 col-sm-4 col-10 text-end">Nom</div>
+                <div class="col-sm-8 col-10">{{ member.name }}</div>
             </div>
-            <div *ngIf='member.firstName' class="row pb-4">
-                <div class="col-md-4">Prénom</div>
-                <div class="col-md-6">{{ member.firstName }}</div>
+            <div *ngIf='member.firstName' class="row pb-4 d-flex justify-content-center">
+                <div class="col-lg-4 col-sm-4 col-10 text-end">Prénom</div>
+                <div class="col-sm-8 col-10">{{ member.firstName }}</div>
             </div>
-            <div *ngIf='member.birthday' class="row pb-4">
-                <div class="col-md-4">Anniversaire</div>
-                <div class="col-md-6">{{ member.birthday }}</div>
+            <div *ngIf='member.birthday' class="row pb-4 d-flex justify-content-center">
+                <div class="col-lg-4 col-sm-4 col-10 text-end">Anniversaire</div>
+                <div class="col-sm-8 col-10">{{ member.birthday | date: 'shortDate'}}</div>
             </div>
-            <div *ngIf='member.color' class="row pb-4">
-                <div class="col-md-4">Couleur</div>
-                <div class="col-md-6">{{ member.color }}</div>
+            <div *ngIf='member.color' class="row d-flex justify-content-center">
+                <div class="col-lg-4 col-sm-4 col-10 text-end">Couleur</div>
+                <div class="col-sm-8 col-10">{{ member.color }}</div>
             </div>
         </div>
         
     </div>
-    <div class="ml-5 mt-5 row d-flex justify-content-center" *ngIf="isCurrentMember">
-        <div class=" col-md-2 ">
+    <div class="ml-5 py-5 row d-flex col-sm-10 justify-content-center" *ngIf="isCurrentMember">
+        <div class="col-sm-3 col-10 pt-3">
             <button (click)="onDeleteMember(member.id)" class="add-btn-word">Supprimer</button>
         </div>    
-        <div class="col-md-2">
+        <div class="col-sm-3 col-10 pt-3">
             <button routerLink="/member-update-form/{{member.id}}" [state]=member class="add-btn-word">Modifier</button>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6 col-10 d-flex justify-content-sm-end pt-3">
             <button routerLink="/my-picture" class="add-btn-word">Voir mes photos</button>
         </div>
     </div>
