@@ -99,7 +99,7 @@ export class StationsMapComponent implements OnInit {
         })
       });
       const feature = new Feature({
-        geometry: new Point([station.lattitude, station.longitude]),
+        geometry: new Point([station.longitude, station.lattitude]),
         name: station.id,
         size: 20,
       });

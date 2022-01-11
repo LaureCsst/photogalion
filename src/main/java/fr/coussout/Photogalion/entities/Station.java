@@ -1,22 +1,36 @@
 package fr.coussout.Photogalion.entities;
 
+import org.geolatte.geom.crs.*;
+import org.hibernate.annotations.Type;
+import org.locationtech.jts.geom.*;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
+@Component
 public class Station implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 	public Double lattitude;
 	public Double longitude;
+
+	@Column(columnDefinition = "geometry")
+	public Geometry geom;
 	public String name;
+
+	public Geometry getGeom() {
+		return geom;
+	}
+
+	public void setGeom(Double lattitude, Double longitude) {
+		geom = GeometryUtil.parseLocation(longitude,lattitude);
+		this.geom = geom;
+	}
+
 	@OneToMany(mappedBy = "station")
 	public Collection<Picture> pictures;
 	@ManyToOne

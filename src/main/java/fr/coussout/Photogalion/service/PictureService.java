@@ -32,21 +32,29 @@ public class PictureService {
     private IStationFormMapper stationFormMapper;
     @Autowired
     private StationRepository stationRepository;
+    @Autowired
+    private StationService stationService;
+    @Autowired
+    private Station station;
+    @Autowired
+    private Picture picture;
+    @Autowired
+    private Member member;
 
     public String add(PictureFormDto[] pictureFormDto) {
-        Station station = new Station();
+        //Creation station - LongLat
         station.setLattitude(pictureFormDto[0].getStations()[0]);
         station.setLongitude(pictureFormDto[0].getStations()[1]);
+        //Création de la variable geom interprétable par geoserver
+        station.setGeom(station.getLattitude(), station.getLongitude());
         stationRepository.save(station);
         Long stationId=station.getId();
         for (PictureFormDto p:pictureFormDto
              ) {
-            Picture picture= new Picture();
             picture=pictureFormMapper.dtoToEntity(p);
             //set the station of the picture
             picture.setStation(station);
             //set the member of the picture
-            Member member=new Member();
             member=memberRepository.getById(p.memberId);
             picture.member=member;
            // picture.station=station;
@@ -58,7 +66,7 @@ public class PictureService {
     @Transactional
     public List<PictureFormDto>  readPicturesFromUser(Long id){
         List<Picture> pictures=pictureRepository.findPicturesByUser(id);
-        List<PictureFormDto> picturesFormDto = new ArrayList<PictureFormDto>();
+        List<PictureFormDto> picturesFormDto = new ArrayList<>();
         for (Picture p: pictures
              ) {
             PictureFormDto pictureFormDto= pictureFormMapper.entityToDto(p);

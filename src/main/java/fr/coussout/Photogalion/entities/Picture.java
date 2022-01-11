@@ -1,5 +1,7 @@
 package fr.coussout.Photogalion.entities;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
+@Component
 public class Picture implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;

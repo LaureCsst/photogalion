@@ -20,10 +20,13 @@ public class StationService {
     private StationRepository stationRepository;
     @Autowired
     private IStationFormMapper stationFormMapper;
+    @Autowired
+    private Station station;
 
     public String add(StationFormDto stationFormDto) {
-        Station station= new Station();
         station=stationFormMapper.dtoToEntity(stationFormDto);
+        station.setGeom(station.getLattitude(), station.getLongitude());
+        System.out.println(station.getGeom());
         stationRepository.save(station);
         return "La station a été ajoutée";
     }

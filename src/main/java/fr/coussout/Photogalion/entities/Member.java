@@ -7,9 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
+
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Entity
+@Component
 @CrossOrigin("*")
 public class Member implements Serializable {
 

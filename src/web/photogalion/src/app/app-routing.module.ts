@@ -13,11 +13,16 @@ import { PictureFormComponent } from './component/page/picture/picture-form/pict
 import { PictureByMemberComponent } from './component/page/picture/picture-by-member/picture-by-member.component';
 import { StationsMapComponent } from './component/page/station/stations-map/stations-map.component';
 import { StationMapFormComponent } from './component/page/station/station-map-form/station-map-form.component';
+import { ExampleComponent } from './component/test/example/example.component';
 const routes: Routes = [
   //Member
   {
     path: "member", 
     component: MemberComponent
+  },  
+  {
+    path: "example", 
+    component: ExampleComponent
   },
   {
     path: "member-detail/:id", 

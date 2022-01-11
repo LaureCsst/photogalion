@@ -27,6 +27,7 @@ import { StationMapFormComponent } from './component/page/station/station-map-fo
 import { FooterComponent } from './component/structure/footer/footer.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { ExampleComponent } from './component/test/example/example.component';
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -47,7 +48,8 @@ registerLocaleData(localeFr, 'fr');
     PictureByMemberComponent,
     StationsMapComponent,
     StationMapFormComponent,
-    FooterComponent
+    FooterComponent,
+    ExampleComponent
   ],
   imports: [
     BrowserModule, 
