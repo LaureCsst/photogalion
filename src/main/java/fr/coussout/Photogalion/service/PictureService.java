@@ -34,8 +34,7 @@ public class PictureService {
     private StationRepository stationRepository;
     @Autowired
     private StationService stationService;
-    @Autowired
-    private Station station;
+
     @Autowired
     private Picture picture;
     @Autowired
@@ -43,6 +42,7 @@ public class PictureService {
 
     public String add(PictureFormDto[] pictureFormDto) {
         //Creation station - LongLat
+        Station station= new Station();
         station.setLattitude(pictureFormDto[0].getStations()[0]);
         station.setLongitude(pictureFormDto[0].getStations()[1]);
         //Création de la variable geom interprétable par geoserver
